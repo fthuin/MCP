@@ -49,6 +49,10 @@ public class CT39V104 {
 		  }
 	  }
 	  
+	  if(t.length == 0){
+          	return 0;
+      	  }
+	  
 	  return sum;
   }
   
