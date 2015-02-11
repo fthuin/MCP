@@ -23,9 +23,10 @@ public class CT39V204 {
 		  
 		  if(sumCurr <= 0){
 			  sumCurr = t[i];
-		  }else{
-		  
-		  sumCurr += t[i];}
+		  }
+		  else{
+		  	sumCurr += t[i];
+		  }
 		  
 		  if (sum < sumCurr ) {
 			  sum = sumCurr;
