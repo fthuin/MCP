@@ -1,4 +1,3 @@
-package main;
 //Ce fichier est encodé en UTF8.
 
 // De Cocq Aymeric
@@ -8,22 +7,6 @@ package main;
 
 // Remplacez les deux caractères XX par votre numéro de groupe encodé sur deux chiffres!
 public class CT39V104 {
-	
-	public static void main(String[] args){
-		int [] t = {3,-2,-1,1,1,2,-4,5,-6,3,5};
-		
-		int [] t2 = {4,-3,-1,-1,3,2,1,4,-1,-1,3,1,-4,5,-1,2};
-		
-		int [] t3 = {3,4,5,6};
-		
-		int [] t4 = {-3,-4,-5,-6};
-		
-		int [] t5 = {-3,-4,-5,-1};
-		
-		int [] t6 = {-3,-1,-5,-6};
-		
-		System.out.println(maxSum(t6));
-	}
   
   // Le paramètre t n'est pas null. 
   // De plus, il représente un vecteur non vide de n entiers relatifs.

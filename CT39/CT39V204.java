@@ -1,4 +1,3 @@
-package main;
 //Ce fichier est encodé en UTF8.
 
 // De Cocq Aymeric
