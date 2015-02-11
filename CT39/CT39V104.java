@@ -1,13 +1,13 @@
 package main;
 //Ce fichier est encodé en UTF8.
 
-//Nom et prénom de l'étudiant 1
-//Nom et prénom de l'étudiant 2
-//Nom et prénom de l'étudiant 3
-//Nom et prénom de l'étudiant 4
+// De Cocq Aymeric
+// El Jilali Solaiman
+// Julémont Léonard
+// Thuin Florian
 
 // Remplacez les deux caractères XX par votre numéro de groupe encodé sur deux chiffres!
-public class CT39V1XX {
+public class CT39V104 {
 	
 	public static void main(String[] args){
 		int [] t = {3,-2,-1,1,1,2,-4,5,-6,3,5};

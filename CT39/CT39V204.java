@@ -1,13 +1,13 @@
 package main;
 //Ce fichier est encodé en UTF8.
 
-//Nom et prénom de l'étudiant 1
-//Nom et prénom de l'étudiant 2
-//Nom et prénom de l'étudiant 3
-//Nom et prénom de l'étudiant 4
+// De Cocq Aymeric
+// El Jilali Solaiman
+// Julémont Léonard
+// Thuin Florian
 
 // Remplacez les deux caractères XX par votre numéro de groupe encodé sur deux chiffres!
-public class CT39V2XX {
+public class CT39V204 {
   
   // Le paramètre t n'est pas null. 
   // De plus, il représente un vecteur de n entiers relatifs.
