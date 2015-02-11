@@ -42,7 +42,9 @@ public class CT39V204 {
   
   //***********************************************************************************
   //Expliquez comment vous avez développé ce programme
-  
+  //Nous avons analysé dans quel cas de figure ce second programme devrait renvoyer une réponse différente de celle renvoyée par le programme que nous avons déjà créé. C'est le cas lorsque la somme de séquance maximale est négative. Ainsi nous avons simplement rajouté une conditions en fin de boucle pour renvoyer 0.
+
   //***********************************************************************************
   //Expliquez pourquoi vous pensez que votre méthode est correcte
+  //Nous pensons que cette méthode est correcte car ce cas de figure est le seul où il faut renvoyer la séquence nulle en tant que plus grande somme possible parmi les sous-séquences du tableau.
 }
