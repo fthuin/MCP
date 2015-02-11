@@ -49,7 +49,7 @@ public class CT39V104 {
   /*
    * Pour trouver le programme nécessaire pour résoudre ce problème, nous avons commencé par prendre un exemple de tableau. A partir de ce tableau, nous avons pris la première case et avons regardé quelle devait être la valeur de la séquence de somme maximale. Par la suite, nous avons ajouté la case suivante et nous avons réfléchi à ce qu'il devait se passer pour que la variable représentant la somme maximale corresponde toujours à la somme maximale. Autrement dit, nous voulions que cette variable ait toujours la même propriété à chaque ajout de nouvelle case, jusqu'à la dernière du tableau. 
    * Après avoir terminé avec le premier tableau, nous avons pris un autre tableau qui contenait des situations plus critiques par rapport au premier pseudo-code que nous avions. Nous avons apporté les modifications nécessaires au programme pour répondre aux situations que nous ne traitions pas dans le cadre de notre premier tableau. 
-   * Nous avons finis par écrire le programme en Java et le tester sur différents tableaux. 
+   * Nous avons fini par écrire le programme en Java et le tester sur différents tableaux. 
    */
   
   //***********************************************************************************
