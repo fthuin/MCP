@@ -1,3 +1,14 @@
+# LaTeX temp
+*.backup
+*.aux
+*.log
+*.nav
+*.toc
+*.snm
+*.pdf
+*.out
+
+# Java compilation
 *.class
 
 # Mobile Tools for Java (J2ME)

@@ -1,0 +1,45 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage[francais]{babel} % Document en français
+\usepackage[utf8]{inputenc} % Document au format UTF8
+\usepackage[T1]{fontenc} % Suppression d'un warning pour la langue francaise
+\usepackage[left=2.2cm, right=2.2cm, top=2.5cm, bottom=2.5cm]{geometry} % Mise en page
+
+\author{Florian \bsc{Thuin}}
+\title{Calculer le nombre de valeurs communes à deux tableaux strictement triés}
+\date{\today}
+
+\begin{document}
+\maketitle
+     
+      Construire un algorithme qui reçoit comme données deux tableaux d'entiers : $a$, de longueur $m$ et $b$, de longueur $n$ ($m,n \ge 0$). La précondition de l'algorithme dit que les deux tableaux sont triés strictement, en ordre croissant, c'est-à-dire qu'on a :
+      
+      \[
+       a[0] < a[1] < ... < a[m-1]
+      \]
+      
+      \[
+       b[0] < b[1] < ... < b[n-1]
+      \]
+      
+      L'algorithme calcule (place dans une variable entière k) le nombre de valeurs commune aux deux tableaux. Par exemple, si les deux tableaux ont les contenus, ci-dessous :
+      
+      \begin{center}
+      \begin{tabular}{lccccccc}
+      & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\ \cline{2-8}
+      $a$ : & \multicolumn{1}{|c|}{-2} & \multicolumn{1}{c|}{0} & \multicolumn{1}{c|}{3} & \multicolumn{1}{c|}{4} & \multicolumn{1}{c|}{6} & \multicolumn{1}{c|}{10} & \multicolumn{1}{c|}{12} \\ \cline{2-8}
+      \end{tabular}
+      \end{center}
+      
+      \begin{center}
+      \begin{tabular}{lcccccc}
+       & 0 & 1 & 2 & 3 & 4 & 5 \\ \cline{2-7}
+      $b$ : & \multicolumn{1}{|c|}{-5} & \multicolumn{1}{c|}{-2} & \multicolumn{1}{c|}{3} & \multicolumn{1}{c|}{5} & \multicolumn{1}{c|}{6} & \multicolumn{1}{c|}{13} \\ \cline{2-7}
+      \end{tabular}
+      \end{center}
+      
+      l'algorithme se terminera avec $k=3$ car les deux tableaux ont trois valeurs communes : -2, 3 et 6.
+      
+      Dans cet exercice, la difficulté est de construire un invariant \textit{complet}, c'est-à-dire un invariant qui permet effectivement de \emph{démontrer séparément les trois conditions} de Hoare. C'est pourquoi, lors de la séance de travaux pratiques, il sera demandé à trois étudiants différents de présenter leur invariant pour ce problème et de démontrer une des conditions de Hoare pour une seule des parties de leur algorithme.
+
+\end{document}
