@@ -17,11 +17,13 @@ public class Presentation {
 			System.out.println("b["+j+"]=" + b[j]);
 			if (a[i] == b[j]) {
 				k++;
+				i++;
+				j++;
 			}
-			if (a[i] < b[j]) {
+			else if (a[i] < b[j]) {
 				i++;
 			}
-			else {
+			else { /* a[i] > b[j] */
 				j++;
 			}
 		}
@@ -29,7 +31,7 @@ public class Presentation {
 	}
 
 	public static void main(String[] args) {
-		int[] a = {-2, 0, 3, 4, 6, 10, 12};
+		int[] a = {-2, 0, 3, 4, 6, 10, 12, 13};
 		int[] b = {-5, -2, 3, 5, 6, 13};
 		int k = nCommonValues(a,b);
 		System.out.println("");
