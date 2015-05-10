@@ -1,0 +1,125 @@
+Théorie du problème 
+
+1. A et B premiers entre eux 
+
+Soient A et B, deux nombres entiers positifs non nuls, premiers entre eux, avec A < B.
+
+Les éléments x_i de la suite x_i = A*i mod B sont uniques pour tous i appartenant à [0, b-1].
+La suite des x_i contiendra tous les léléments entre [0, b-1] car ils sont uniques et il y en a B (propriété du modulo : 0<= x_i < B).
+
+Preuve 
+
+Prouvons que si X et Y sont deux entiers dans [0, B-1] et que A*X mod B = A*Y mod B alors X = Y. 
+
+Autrement dit, deux éléments de la suite des x_i ne sont égaux que s'il s'agit du même i, et donc du même élément. 
+
+Nous notons la congruence modulo N de deux nombres entiers positifs A et B  : A ≡ B (mod N). 
+
+Donc nous notons : A*X ≡ A*Y (mod B).
+
+Grâce aux proptiétés du modulo, nous savons que 
+
+A*X ≡ A*Y (mod B) => A*(X-Y) ≡ 0 (mod B).
+
+Comme A et B sont premiers, on sait que leur pgcd = 1, puisqu'ils n'ont pas de diviseur commun autre que 1. 
+
+Et par définition du PPCM : PPCM(A,B) = A*B/pcgq(A,B) = A*B/1 = A*B
+
+Ce qui signifie que B ne peut pas être un multiple de A. 
+(Ecrire en math) Il n'existe pas de k appartenant à Z et k > 0 tel que A*k = B
+Sinon A*k serait le PPCM de A et B 
+
+Donc nous savons que : A*(X-Y) ≡ 0 (mod B) => (X-Y) = 0
+
+car X et Y appartiennent à [0, B-1], donc (X-Y) appartient à [-(B-1),B-1]. Et comme B n'est pas un multiple de A, A "n'apporte rien" à la congruence avec 0. 
+B doit donc être multiple de (X-Y). Mais au vu des valeurs que peut prendre (X-Y), la seule posibilité est (X-Y) = 0.
+
+Ou dit autrement, comme  Il n'existe pas de k appartenant à Z et k > 0 tel que A*k = B, il faut que (X-Y) soit égal à 0, pour que A*(X-Y) ≡ 0 (mod B) soit vrai. 
+
+On a donc que X = Y. Nous avons donc prouvé ce que nous voulions. 
+
+Intuitivement : si A et B sont premiers entre eux, cela signifie que faire A*i mod B avec i dans [0, B-1], nous donnera toujours un nombre différent. Donc pour notre problème, en partant à l'indice 0, on peut ajouter le decalage et avoir l'indice d'une case qui n'a pas encore été visitée. on peut ajouter une nouvelle fois le décalage et tomber sur une autre case non visitée. On peut faire cela B fois. Grâce à ce nous avons montré, on sait que l'on ne tombera pas deux fois sur la même case et que les parcourera toutes. 
+
+
+
+2. Quand A et B ne sont pas premiers
+
+Soient A et B deux nombres entiers positifs avec A < B. Les éléments de la suite x_{i,c} = (c + (A*i)) mod B sont uniques pour tous c appartenant à [0, pgcd(A,B)-1] et i appartenant à [0, (B/pgcd(A,B)) -1], et cette suite contiendra tous les éléments de [0, B-1]. 
+
+On sait que PPCM(A,B) = A*B/PGCD(A,B). Prenons j = B/PGCD(A;B), donc PPCM(A,B) = A*J
+
+Si l'on prend x_{i} = A*i mod B pour tout i appartenant à [0, J-1], on sait que les éléments x{i} seront uniques. 
+En prenant X et Y appartenant à [0, J-1], on sait que A*(X-Y) ≡ 0 (mod B) ne sera vrai que pour X=Y. 
+Etant donné que (X-Y) appartient à [-J+1, J-1]. Comme nous l'avons dis plus haut, la seule posibilité que soit congruence soit respectée est que (X-Y) = 0, donc X=Y. 
+
+Donc A*i mod B = x{i}, les x{i} seront uniques pour i appartenant a [0; J-1].
+
+Maintenant, il ne manque plus qu'a ajouter le c dans cette expression pour arriver à l'expression énoncée plus haut. 
+
+Les propriétés du modulo nous donne : si e ≡ f (mod N) alors e+g ≡ f+g (mod N).  
+
+On peut donc écrire : (c +(A*i)) mod B = x{i,c} pour i dans [0, J-1] et c dans [0, pgcd(A;B) -1]. Par le même raisonnement que celui que nous avons présenté, nous pouvons dire que les éléments x{i,c} seront uniques et il y en aura B. 
+
+En effet, nous savons que i peut prendre B/pgcd(A,B) valeurs différentes et c peut prendre pgcq(A,B) valeur differentes. Donc x{i,c} peut prendre B valeurs différents. 
+
+
+Intuitivement : 
+
+On découpe le cadran en B/pgcd parties de pgcd éléments. 
+A*i mod B nous permet d'atteindre le premier élément de chaque partie et c nous permet d'atteindre le cieme élement d'une partie. 
+Cela nous permet de déplacé le cieme élément de chaque partie à la cieme position de la partie suivante. ce qui correspond à un decalage de A éléments. 
+
+==============================================
+
+
+Pre, post, H, inv sont bien des expressions logiques (a vérifier)
+
+
+
+Invariant SwitchCadran2
+
+startIndex = startIndex_0
+^ decalage = decalage_0
+^ nswitch = nswitch_0
+^ tab = tab_0 [val_1^0, val_1^1, ... val_1^tab.length]
+^ 0<= switchDone < tab.length
+^ 0<= i < tab.length
+^ i = startindex + (switchDone+1  * decalage) % tab.length
+^ tmp = tab[(startIndex + (SwitchDone * decalage))  % tab.length]
+^ les éléments x_j tels que Vj, j dans Z, j<SwitchDone on a x_j=tab_0[(startindex + (j*decalage)) % tab.length] sont déplacés aux index (startindex + ((j+1)* decalage))%tab.length
+
+
+{Pre} Init {Inv}
+
+{} tq (startIndex = startIndex_0
+^ decalage_1 = decalage_0
+^ nswitch_1 = nswitch_0
+^ tab = tab_0 [val_1^0, val_1^1, ... val_1^tab.length])
+
+
+{switchDone = 0, i = (startIndex_0 + decalage_0) % tab.length, tmp = tab_0[startindex_0]}
+
+on a bien : 
+- 0<= switchDone < tab.length
+- i = startindex + (switchDone+1  * decalage) % tab.length car switchDone = 0
+- tmp = tab[(startIndex + (SwitchDone * decalage))  % tab.length] car switchDone = 0
+
+l'invariant est donc vérifié sur Init
+
+
+
+
+{Inv && !H} Iter {Inv}
+
+{} tq (startIndex = startIndex_0
+^ decalage_1 = decalage_0
+^ nswitch_1 = nswitch_0
+^ tab = tab_0 [val_1^0, val_1^1, ... val_1^tab.length]
+^ 0<= switchDone_1 < tab.length
+^ 0<= i_1 < tab.length
+^ i_1 = startindex_1 + (switchDone_1+1  * decalage_1) % tab.length
+^ tmp_1 = tab_1[(startIndex_1 + (SwitchDone_1 * decalage_1))  % tab.length]
+^ les éléments x_j tels que Vj, j dans Z, j<SwitchDone_1 on a x_j=tab_0[(startindex_1 + (j*decalage_1)) % tab.length] sont déplacés aux index (startindex_1 + ((j+1)* decalage_1))%tab.length)
+
+
+
