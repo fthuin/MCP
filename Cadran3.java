@@ -21,7 +21,7 @@ public class Cadran3 {
 	 *		 nSwitch est un entier positif 0 <= nSwitch < tab.length 
 	 * Post : le tableau est modifié de manière à ce que les éléments aux
 	 * positions P_{i} sont déplacés aux positions P_{i+1} pour tout i appartenant
- 	 * à [0, tab.length / nSwitch] tel que P_{x} = ((startIndex + nSwitch) * x) mod tab.length
+ 	 * à [0,nSwitch[ tel que P_{x} = (startIndex + (decalage * x)) mod tab.length
 	 * Résultat : -
 	 * Invariant :
 	 * 				tmp = tab[startIndex + switchDone * decalage]
@@ -30,7 +30,7 @@ public class Cadran3 {
 	 */
     public static void switchCadran2(int[] tab, int startIndex, int decalage, int nSwitch) {
         int switchDone = 0;
-        int i = startIndex + decalage;
+        int i = (startIndex + decalage) % tab.length;
         int tmp = tab[startIndex];
     	while (! (switchDone == nSwitch)) {
 	        tmp = switchUnique(tab, i, tmp);
@@ -48,7 +48,7 @@ public class Cadran3 {
     public static void switchCadran(int[] tab, int decalage) {
         int switchDone = 0;
         //int pgcd = pgcd(tab.length, decalage);
-        int pgcd = 1; /* A supprimer */
+        int pgcd = 4; /* A supprimer */
         while (! (switchDone==pgcd)) {
             switchCadran2(tab, switchDone, decalage, tab.length / pgcd);
             switchDone++;
@@ -83,10 +83,8 @@ public class Cadran3 {
 //    }
 
     public static void main(String[] args) {
-		int test = -5 % 2;
-		System.out.println("test : " + test);
         int[] tab = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
-        switchCadran(tab, 5);
+        switchCadran(tab, 8);
         for (int i = 0; i < tab.length ; i++) {
             System.out.println("tab["+i+"]="+tab[i]);
         }
