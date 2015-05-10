@@ -1,5 +1,32 @@
 public class Cadran3 {
-
+	
+	/*
+	*Pre: a un entier
+	* Retourne la valeur absolue de a
+	*/
+	
+	public static int abs(int a){
+		if(a<0){
+			return -a;
+		}
+		else{
+			return a;
+		}
+	}
+	 
+	 /* Pre: a et b deux entiers
+	 * Post: Le plus grand commun diviseur de a et b  */
+	public static int pgcd(int a, int b) {
+	  a = abs(a); b = abs(b);
+	  while (a!=b)  
+		  if (a>b){
+			  a=a-b;
+			  }
+		  else {
+			  b=b-a;
+			  };
+	  return(a);
+	}
 	/* Pré : tab est un tableau d'entiers
 	 *		 tab != null
 	 *		 j est un indice tel que 0 <= j < tab.length
@@ -48,7 +75,7 @@ public class Cadran3 {
     public static void switchCadran(int[] tab, int decalage) {
         int switchDone = 0;
         //int pgcd = pgcd(tab.length, decalage);
-        int pgcd = 4; /* A supprimer */
+        int pgcd = pgcd(tab.length,decalage); /* A supprimer */
         while (! (switchDone==pgcd)) {
             switchCadran2(tab, switchDone, decalage, tab.length / pgcd);
             switchDone++;
