@@ -79,10 +79,10 @@ Pre, post, H, inv sont bien des expressions logiques (a vérifier)
 Invariant SwitchCadran2
 
 startIndex = startIndex_0
+^ 0 <= startIndex < tab.length
 ^ decalage = decalage_0
 ^ nswitch = nswitch_0
-^ tab = tab_0 [val_1^0, val_1^1, ... val_1^tab.length]
-^ 0<= switchDone < tab.length
+^ 0 <= switchDone <= nSwitch < tab.length 
 ^ 0<= i < tab.length
 ^ i = startindex + (switchDone+1  * decalage) % tab.length
 ^ tmp = tab[(startIndex + (SwitchDone * decalage))  % tab.length]
@@ -91,35 +91,136 @@ startIndex = startIndex_0
 
 {Pre} Init {Inv}
 
-{} tq (startIndex = startIndex_0
+{startIndex = startIndex_0, decalage = decalage_0, nswitch = nswitch_0 } tq 
+(startIndex_1 = startIndex_0
 ^ decalage_1 = decalage_0
 ^ nswitch_1 = nswitch_0
 ^ tab = tab_0 [val_1^0, val_1^1, ... val_1^tab.length])
 
+INIT
 
 {switchDone = 0, i = (startIndex_0 + decalage_0) % tab.length, tmp = tab_0[startindex_0]}
 
 on a bien : 
 - 0<= switchDone < tab.length
-- i = startindex + (switchDone+1  * decalage) % tab.length car switchDone = 0
+- i = startindex + ((switchDone+1)  * decalage) % tab.length car switchDone = 0
 - tmp = tab[(startIndex + (SwitchDone * decalage))  % tab.length] car switchDone = 0
+- il n'existe pas de j dans Z et < SwitchDone = 0 donc cette expression est vrai
 
 l'invariant est donc vérifié sur Init
 
 
 
-
 {Inv && !H} Iter {Inv}
 
-{} tq (startIndex = startIndex_0
+{switchDone = switchDone_1, i = i_1, tmp = tmp_1, startIndex = startIndex_1, decalage = decalage_1, nswitch = nswitch_1, tab = tab_1} 
+tq (startIndex_1 = startIndex_0
+^ 0 <= startIndex < tab.length
 ^ decalage_1 = decalage_0
-^ nswitch_1 = nswitch_0
-^ tab = tab_0 [val_1^0, val_1^1, ... val_1^tab.length]
+^ nSwitch_1 = nSwitch_0
+^ 0 <= switchDone_1 <= nSwitch_1 < tab.length 
 ^ 0<= switchDone_1 < tab.length
 ^ 0<= i_1 < tab.length
-^ i_1 = startindex_1 + (switchDone_1+1  * decalage_1) % tab.length
+^ i_1 = startindex_1 + ((switchDone_1+1)  * decalage_1) % tab.length
 ^ tmp_1 = tab_1[(startIndex_1 + (SwitchDone_1 * decalage_1))  % tab.length]
-^ les éléments x_j tels que Vj, j dans Z, j<SwitchDone_1 on a x_j=tab_0[(startindex_1 + (j*decalage_1)) % tab.length] sont déplacés aux index (startindex_1 + ((j+1)* decalage_1))%tab.length)
+^ les éléments x_j tels que Vj, j dans Z, j<SwitchDone_1 on a x_j=tab_0[(startindex_1 + (j*decalage_1)) % tab.length] sont déplacés aux index (startindex_1 + ((j+1)* decalage_1))%tab.length
+^ switchDone_1 != nSwitch_1)
+
+switchUnique peut être appelé car tab est bien un tableau d'entiers, tab est non null et i est un indice valide du tableau. 
+
+tmp = switchUnique(tab, i, tmp);
+
+Donc tmp = tab_1[i_1], ce qui correspond à tmp = tab_1[startindex_1 + ((switchDone_1+1)  * decalage_1) % tab.length]. 
+
+Le tableau a été modifié : tab = tab_1[val_1^0,val_1^1, ..., val_1^((i_1)-1), tmp_1, ...]. 
+
+ i = (i+decalage) % tab.length;
+ 
+ Dans l'environnement : i = i_1 + decalage  % tab.length = startindex_1 + ((switchDone_1+1)  * decalage_1) % tab.length  + decalage_1 %tab.length = startIndex_1 + ((swhitchDone_1+2)*decalage_1) %tab.length
+ 
+ switchDone++;
+ 
+Après l'ITER, l'environnement devient donc : 
+
+{switchDone = switchDone_1+1, i = startIndex_1 + ((swhitchDone_1+2)*decalage_1) %tab.length, tmp = tab_1[startindex_1 + ((switchDone_1+1)  * decalage_1) % tab.length], startIndex = startIndex_1, decalage = decalage_1, nswitch = nswitch_1, tab = tab_1[val_1^0,val_1^1, ..., val_1^((i_1)-1), tmp_1, ...]} tq (...)
+
+On obtient bien notre invariant. 
+- comme switchDone est différent de nSwitch et inférieur ou égal, on sait qu'il est toujours inférieur à tab.length
+- tmp = tab_1[startindex_1 + ((switchDone_1+1)  * decalage_1) % tab.length] = tab_1[startindex + (switchDone  * decalage) % tab.length]
+- i = startIndex_1 + ((swhitchDone_1+2)*decalage_1) %tab.length = startIndex + ((swhitchDone+1)*decalage) %tab.length
+- pour tab, on a tab = tab_1[val_1^0,val_1^1, ..., val_1^((i_1)-1), tmp_1, ...], avec tmp_1 = tab_1[(startIndex_1 + (SwitchDone_1 * decalage_1))  % tab.length], et donc avec le nouvel envoronnement : tmp_1 = tab_1[(startIndex + ((SwitchDone-1) * decalage))  % tab.length]. 
+Grâce à notre invariant nous savons déjà que les éléments x_j tels que Vj, j dans Z, j<SwitchDone_1 on a x_j=tab_0[(startindex_1 + (j*decalage_1)) % tab.length] sont déplacés aux index (startindex_1 + ((j+1)* decalage_1))%tab.length. On a maintenant Vj, j dans Z et j<switchDone=switchDone_1 + 1, donc seul l'élélement x_j avec j= switchDone - 1 = switchDone_1 a du être déplacé. Et c'est le cas, il s'agit de l'élément qui était dans tmp_1 et qui a été placé à l'index : startindex_1 + ((switchDone_1+1)  * decalage_1) % tab.length. Grâce à notre théorie du problème nous savons que cet élément n'est pas un élément qui avait déjà été déplacé. Ceci nous donne donc la dernière conjonction de notre invariant. 
+
+Notre invariant est donc vérifié sur Iter. 
 
 
 
+{Inv && H} Clot {Post}
+
+{switchDone = switchDone_1, i = i_1, tmp = tmp_1, startIndex = startIndex_1, decalage = decalage_1, nswitch = nswitch_1, tab = tab_1} 
+tq (startIndex_1 = startIndex_0
+^ 0 <= startIndex < tab.length
+^ decalage_1 = decalage_0
+^ nSwitch_1 = nSwitch_0
+^ 0 <= switchDone_1 <= nSwitch_1 < tab.length 
+^ 0<= switchDone_1 < tab.length
+^ 0<= i_1 < tab.length
+^ i_1 = startindex_1 + ((switchDone_1+1)  * decalage_1) % tab.length
+^ tmp_1 = tab_1[(startIndex_1 + (SwitchDone_1 * decalage_1))  % tab.length]
+^ les éléments x_j tels que Vj, j dans Z, j<SwitchDone_1 on a x_j=tab_0[(startindex_1 + (j*decalage_1)) % tab.length] sont déplacés aux index (startindex_1 + ((j+1)* decalage_1))%tab.length
+^ switchDone_1 == nSwitch_1)
+
+La post condition de notre sous problème demande que : le tableau est modifié de manière à ce que les éléments aux positions P_{i} sont déplacés aux positions P_{i+1} pour tout i appartenant à [0,nSwitch[ tel que P_{x} = (startIndex + (decalage * x)) mod tab.length
+
+Comme H est vrai, nous avons switchDone == nSwitch. Donc en remplacant switchDone par nSwitch dans la dernière conjonction de notre invariant, nous savons que : les éléments x_j tels que Vj, j dans Z, j<nSwitch on a x_j=tab_0[(startindex + (j*decalage)) % tab.length] sont déplacés aux index (startindex + ((j+1)* decalage))%tab.length. 
+Cela correspond exactement à notre postcondition. 
+
+
+Nous avons donc vérifié le tripler d'Hoar-Mana, ce qui nous montre que cet invariant est correct pour cet algorithme. 
+Nous avons donc effectué la correction partielle de ce sous problème. 
+
+========
+
+Essayons maintenant de prouver la terminaison de ce sous-probleme. 
+
+Variant  : tab.length - switchDone
+
+Inv => 0<=switchDone <= tab.length donc tab.length - switchDone >= 0.
+Notre variant est bien positif ou nul. 
+
+Vérifions maintenant que notre variant décroit sur Iter. 
+
+Prenons Inv && !H 
+
+E = {switchDone = switchDone_1, i = i_1, tmp = tmp_1, startIndex = startIndex_1, decalage = decalage_1, nswitch = nswitch_1, tab = tab_1} 
+tq (startIndex_1 = startIndex_0
+^ 0 <= startIndex < tab.length
+^ decalage_1 = decalage_0
+^ nSwitch_1 = nSwitch_0
+^ 0 <= switchDone_1 <= nSwitch_1 < tab.length 
+^ 0<= switchDone_1 < tab.length
+^ 0<= i_1 < tab.length
+^ i_1 = startindex_1 + ((switchDone_1+1)  * decalage_1) % tab.length
+^ tmp_1 = tab_1[(startIndex_1 + (SwitchDone_1 * decalage_1))  % tab.length]
+^ les éléments x_j tels que Vj, j dans Z, j<SwitchDone_1 on a x_j=tab_0[(startindex_1 + (j*decalage_1)) % tab.length] sont déplacés aux index (startindex_1 + ((j+1)* decalage_1))%tab.length
+^ switchDone_1 != nSwitch_1)
+
+La seule instruction intéressante est : switchDone++; 
+
+Cela nous donne un nouvel environnement : 
+
+E' = {switchDone = switchDone_1 +1, ...} tq (...)
+
+Var(E) = tab.length - switchDone_1
+Var(E') = tab.length - switchDone = tab.length - (switchDone_1 +1)
+
+On a donc : Var(E) = tab.length - switchDone_1 > tab.length - (switchDone_1 +1) = tab.length - switchDone = Var(E').
+
+On a donc bien un variant qui décroit sur iter. 
+
+Ceci nous montre que ce sous probleme ce finira toujours. 
+
+==========
+
+
+Nous avons donc fini la correction partielle et prouver que cet algorithme s'arrête toujours. On peut donc en conclure que cet algorithme est correcte, suivant ces spécifications. 
