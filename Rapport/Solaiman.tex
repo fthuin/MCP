@@ -19,23 +19,20 @@ $\dot{\wedge}$ & $\forall i \in \mathbb{Z} \mid i < \mathrm{switchDone} $, $\for
 $\Rightarrow$ & les éléments aux indices $tab_{0}[(j \times decalage + i) \% tab.length]$ sont déplacés aux indices $(((j+1)\times decalage)+i) \% tab.length$ \\
 \end{tabular}\\
 
-\noindent \textbf{Condition d'arrêt: }\\
-switchDone==pgcd \\
-
-\noindent \begin{tabular}{l|l}
+\noindent \begin{tabular}{ll}
 \textbf{Init: } & \textbf{Iter: }\\
 switchDone := 0; & switchCadran2(tab, switchDone, decalage, tab.length / pgcd); \\
 pgcd := pgcd(tab.length,decalage); & switchDone=switchDone+1;\\
+ & \\
+\textbf{H:}switchDone==pgcd & \textbf{Clot: } -\\
 \end{tabular}\\
-
-\noindent \textbf{Clot: } -
 
 \subsubsection*{\{Pre\} Init \{Inv\}}
 
 \{decalage = $decalage_{0}$, tab = tab$_{0}$ [val$_{0}^{0}$, val$_{0}^{1}$, ... ,val$_{0}^{tab.length-1}$])\} tel que \\tab est un tableau d'entiers != null
 $\dot{\wedge}$ decalage est un nombre entiers positifs\\
 
-INIT
+INIT\\
 
 \{switchDone = 0, pgcd = PGCD(tab.length, decalage)\} \footnote{Par manque d'espace nous ne prouverons pas l'exactitude de la fonction PGCD mais elle peut être prouvée de la même manière que vue au cours}
 

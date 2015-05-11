@@ -53,16 +53,15 @@ $\wedge$ $i =$ startIndex $+ (($switchDone$+1)\times$ decalage)$ \% tab.length$\
 $\wedge$ tmp = tab[(startIndex $+$ (switchDone$\times$ decalage))  $\% $tab.length$]$\\
 $\wedge$ Les éléments $x_{j}$ tels que $\forall\ j$, $j$ dans $\mathbb{Z}$, $j<$switchDone on a $x_{j}=$tab$_{0}[($startindex$ + (j\times$ decalage))$\ \%$ tab.length$]$ sont déplacés aux index $($startindex$ + ((j+1)\times  $decalage$))\% $tab.length\\
 
-\noindent \textbf{Condition d'arrêt:} switchDone == nSwitch\\
-
-\noindent \begin{tabular}{l|l}
+\noindent \begin{tabular}{ll}
 \textbf{Init:} & \textbf{Iter: }\\
 switchDone := 0; & tmp := switchUnique(tab, i, tmp);\\
 i := (startIndex + decalage) \% tab.length; & i := (i+decalage) \% tab.length;\\
 tmp := tab[startIndex]; & switchDone := switchDone + 1;\\
+ & \\
+\textbf{H:} switchDone == nSwitch & \textbf{Clot: } - \\
 \end{tabular}\\
 
-\noindent \textbf{Clot: } -\\
 
 \subsubsection*{$\{$Pre$\}$ Init $\{$Inv$\}$}
 
@@ -133,7 +132,9 @@ On obtient bien notre invariant:
 	\item $i$ = startIndex$_{1}$ + ((swhitchDone$_{1}+2)\times $decalage$_{1}$) \% tab.length
 		\subitem = startIndex + ((switchDone+1)$\times$ decalage) \%tab.length
 	\item pour tab, on a tab = tab$_{1}$[val$_{1}^{0}$,val$_{1}^{1}$, ..., val$_{1}^{((i_{1})-1)}$, tmp$_{1}$, ...], avec tmp$_{1}$ = tab$_{1}$[(startIndex$_{1}$ + (switchDone$_{1}\times$ decalage$_{1}$)) \% tab.length], et donc avec le nouvel environnement : tmp$_{1}$ = tab$_{1}$[(startIndex + ((switchDone-1)$\times$ decalage)) \% tab.length]. 
-	\item Grâce à notre invariant nous savons déjà que les éléments $x_{j}$ tels que $\forall j$, $j \in \mathbb{Z}$, $j<$switchDone$_{1}$ on a $x_{j}=$tab$_{0}$[(startindex$_{1}$ + ($j\times$ decalage$_{1}$)) \% tab.length] sont déplacés aux index (startindex$_{1} + ((j+1)\times$ decalage$_{1}$))\% tab.length. On a maintenant $\forall j, j$ dans $\mathbb{Z}$ et $j<$ switchDone = switchDone$_{1}$ + 1, donc seul l'élément $x_{j}$ avec $j=$ switchDone - 1 = switchDone$_{1}$ a du être déplacé. Et c'est le cas, il s'agit de l'élément qui était dans tmp$_{1}$ et qui a été placé à l'index : startindex$_{1}$ + ((switchDone$_{1}+1)\times$ decalage$_{1}$) \% tab.length. Grâce à notre théorie du problème nous savons que cet élément n'est pas un élément qui avait déjà été déplacé. Ceci nous donne donc la dernière conjonction de notre invariant. \\
+	\item Grâce à notre invariant nous savons déjà que les éléments $x_{j}$ tels que $\forall j$, $j \in \mathbb{Z}$, $j<$switchDone$_{1}$ on a $x_{j}=$tab$_{0}$[(startindex$_{1}$ + ($j\times$ decalage$_{1}$)) \% tab.length] sont déplacés aux index (startindex$_{1} + ((j+1)\times$ decalage$_{1}$))\% tab.length.\\
+		On a maintenant $\forall j, j$ dans $\mathbb{Z}$ et $j<$ switchDone = switchDone$_{1}$ + 1, donc seul l'élément $x_{j}$ avec $j=$ switchDone - 1 = switchDone$_{1}$ a du être déplacé. Et c'est le cas, il s'agit de l'élément qui était dans tmp$_{1}$ et qui a été placé à l'index : startindex$_{1}$ + ((switchDone$_{1}+1)\times$ decalage$_{1}$) \% tab.length.\\
+		Grâce à notre théorie du problème nous savons que cet élément n'est pas un élément qui avait déjà été déplacé. Ceci nous donne donc la dernière conjonction de notre invariant. \\
 \end{itemize}
 
 Notre invariant est donc vérifié sur Iter. \\
