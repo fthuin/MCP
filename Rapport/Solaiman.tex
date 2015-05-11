@@ -3,8 +3,8 @@ Invariant :
 \begin{tabular}{ll}
 
 & $\mathrm{decalage}=\mathrm{decalage}_{0}$ \\
-$\bigwedge$ & $\forall i \in \mathbb{Z} \mid i < \mathrm{switchDone} $ \\
-$\bigwedge$ & $\forall j \in \mathbb{Z} \mid j < \frac{\mathrm{tab.length}}{\mathrm{pgcd}}$ \\
+$\dot{\wedge}$ & $\forall i \in \mathbb{Z} \mid i < \mathrm{switchDone} $ \\
+$\dot{\wedge}$ & $\forall j \in \mathbb{Z} \mid j < \frac{\mathrm{tab.length}}{\mathrm{pgcd}}$ \\
 $\Rightarrow$ & les éléments aux indices $tab_{0}[(j+i) \% tab.length]$ sont déplacés aux indices $((j*decalage)+i) \% tab.length$
 \end{tabular}
 
