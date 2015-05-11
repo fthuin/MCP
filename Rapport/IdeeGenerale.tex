@@ -1,0 +1,3 @@
+Pour que la lecture de ce rapport soit plus facile, nous allons décrire ici l'idée générale de la solution que nous proposons. \\
+
+Le cadran peut être divisé en un certain nombres de parties ayant toutes le même nombres d'éléments, de telle manière à ce que le premier élément de la première partie doive être déplacé à la première position de la partie suivante. Nous utilisons donc un sous-problème qui nous permet de déplacé le $X^{ieme}$ élément de la $Y^{ieme}$ partie, à la position $X$ de la partie $Y^{ieme} modulo la taille du tableau$. L'algorithme principal fera, quand à lui, un appel au sous-problème autant de fois qu'il y a d'élément dans une partie. Cela permet décaler les éléments à toutes les positions dans les parties, dans chaque partie. 
