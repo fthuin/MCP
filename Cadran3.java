@@ -2,7 +2,8 @@ public class Cadran3 {
 	
 	/*
 	*Pre: a un entier
-	* Retourne la valeur absolue de a
+	*Post: -
+	*Resultat: la valeur absolue de a
 	*/
 	
 	public static int abs(int a){
@@ -14,8 +15,9 @@ public class Cadran3 {
 		}
 	}
 	 
-	 /* Pre: a et b deux entiers
-	 * Post: Le plus grand commun diviseur de a et b  */
+	/* Pre: a et b deux entiers
+	 * Post: Le plus grand commun diviseur de a et b
+	 */
 	public static int pgcd(int a, int b) {
 	  a = abs(a); b = abs(b);
 	  while (a!=b)  
@@ -27,13 +29,16 @@ public class Cadran3 {
 			  };
 	  return(a);
 	}
+	
 	/* Pré : tab est un tableau d'entiers
 	 *		 tab != null
 	 *		 j est un indice tel que 0 <= j < tab.length
 	 * 
 	 * Post : le tableau est modifié de manière que tmp a été placé à l'indice
 	 * j du tableau tab.
-	 * Résultat : La valeur présente à l'indice j de tab lors de l'appel à la 		 * méthode est renvoyé
+	 *
+	 * Résultat : La valeur présente à l'indice j de tab lors de l'appel à la
+	 * méthode est renvoyé
      */
     public static int switchUnique(int[] tab, int j, int tmp) {
         int tmp2 = tab[j];
@@ -50,10 +55,6 @@ public class Cadran3 {
 	 * positions P_{i} sont déplacés aux positions P_{i+1} pour tout i appartenant
  	 * à [0,nSwitch[ tel que P_{x} = (startIndex + (decalage * x)) mod tab.length
 	 * Résultat : -
-	 * Invariant :
-	 * 				tmp = tab[startIndex + switchDone * decalage]
-	 * 			  ^ 0 <= switchDone <= nSwitch
-	 * 			  ^ 
 	 */
     public static void switchCadran2(int[] tab, int startIndex, int decalage, int nSwitch) {
         int switchDone = 0;
@@ -81,33 +82,6 @@ public class Cadran3 {
             switchDone++;
         }
     }
-
-//    public static void switchCadran(int decal, int[] tab) {
-//        int i = 0;
-//    	  int lastStart = 0;
-//        int tmp = tab[0];
-//        int tmp2;
-//        int switchDone = 0;
-//        while (! (switchDone == tab.length)) {
-
-//		System.out.println("Switch i : "+i+" with : "+tab[i]+", to : "+((i + decal) % tab.length)+" with : "+tab[(i + decal) % tab.length]+", memory : "+tmp);
-
-//		if ((i + decal)%tab.length == lastStart) {
-//	            tmp2 = tab[ (i + decal + 1) % tab.length ];
-//	            tab[ (i + decal) % (tab.length) ] = tmp;
-//	            tmp = tmp2;
-//	            i = (i + decal +1) % (tab.length);
-//		    lastStart = i;
-//		}
-//		else {
-//	            tmp2 = tab[ (i + decal) % tab.length ];
-//	            tab[ (i + decal) % (tab.length) ] = tmp;
-//	            tmp = tmp2;
-//	            i = (i + decal) % (tab.length);
-//			}
-//		switchDone++;
-//        }
-//    }
 
     public static void main(String[] args) {
         int[] tab = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
