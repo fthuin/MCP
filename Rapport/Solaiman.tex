@@ -1,17 +1,19 @@
+\subsection{Sous-problème 2}
+
 Invariant :
 
 \begin{tabular}{ll}
 
 & $\mathrm{decalage}=\mathrm{decalage}_{0}$ \\
 $\bigwedge$ & $\forall i \in \mathbb{Z} \mid i < \mathrm{switchDone} $ \\
-$\bigwedge$ & $\forall j \in \mathbb{Z} \mid j < \frac{\mathrm{tab.length}}{\mathrm{pgcd}}$ \\
-$\Rightarrow$ & les éléments aux indices $tab_{0}[(j+i) \% tab.length]$ sont déplacés aux indices $((j*decalage)+i) \% tab.length$
+$\bigwedge$ & $\forall j \in \mathbb{Z} \mid j < \frac{\mathrm{tab.length}}{\mathrm{PGCD}}$ \\
+$\Rightarrow$ & les éléments aux indices $tab_{0}[(j+i) \% tab.length]$ sont déplacés aux indices $((j\times decalage)+i) \% tab.length$
 \end{tabular}
 
 \{Pre\} Init \{Inv\}
 
-$\{decalage=decalage_{0}, pgcd =\cdots, switchDone=0$
-$pgcd_{1} = \cdots$
+$\{decalage=decalage_{0}, PGCD =\cdots, switchDone=0$
+$PGCD_{1} = \cdots$
 
 On a bien qu'il n'existe aucun $i < \mathrm{switchDone}$ et donc
 qu'aucun élément n'est déplacé au sein de tab.
@@ -21,19 +23,19 @@ L'invariant est donc vérifié sur INIT.
 \{Inv \&\& !H \} Iter \{Inv\}
 
 A chaque itération, switchCadran2 est appelé avec les arguments : tab,
-switchDone (incrémenté), decalage et tab.length / pgcd. De ce fait,
+switchDone (incrémenté), décalage et tab.length / PGCD. De ce fait,
 selon la spécification de switchCadran2 prouvé précédemment, nous avons
 que chaque élément $x \in [0\cdots
-    \frac{\mathrm{tab.length}}{\mathrm{pgcd}}[$ sont déplacés à la
-        position $(x*\mathrm{decal})+i \% \mathrm{tab.length}$ avec $i < \mathrm{switchDone}$
+    \frac{\mathrm{tab.length}}{\mathrm{PGCD}}[$ sont déplacés à la
+        position $(x\times \mathrm{decal})+i \% \mathrm{tab.length}$ avec $i < \mathrm{switchDone}$
 
 On a donc que les éléments aux indices
 $tab_{0}[(j+i)\%\mathrm{tab.length}]$ sont déplacés aux indices
-$((j*decalage) + i) \% \mathrm{tab.length}$ pour chaque $i <
+$((j\times decalage) + i) \% \mathrm{tab.length}$ pour chaque $i <
 \mathrm{switchDone}$
-et $j \leq \frac{\mathrm{tab.length}}{\mathrm{pgcd}}$
+et $j \leq \frac{\mathrm{tab.length}}{\mathrm{PGCD}}$
 
-\{Inv \&\& H\} Clot \{Post\} Nous avons que switchDone=pgcd ce qui implique qu'on a déplacé
-$\mathrm{pgcd}*\frac{\mathrm{tab.length}}{\mathrm{pgcd}}$ éléments et
+\{Inv \&\& H\} Clot \{Post\} Nous avons que switchDone=PGCD ce qui implique qu'on a déplacé
+$\mathrm{PGCD}\times \frac{\mathrm{tab.length}}{\mathrm{PGCD}}$ éléments et
 que chacun d'entre eux est déplacé une et une seule fois (comme démontré
 plus haut). Tous les élémetnts de tab sont donc déplacés de décal positions.
