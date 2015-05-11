@@ -4,10 +4,8 @@ Invariant :
 
 & $\mathrm{decalage}=\mathrm{decalage}_{0}$ \\
 $\bigwedge$ & $\forall i \in \mathbb{Z} \mid i < \mathrm{switchDone} $ \\
-$\bigwedge$ & $\forall j \in \mathbb{Z} \mid j <
-\frac{\mathrm{tab.length}}{\mathrm(pgcd}}$ \\
-$\Rightarrow$ & les éléments aux indices $tab_{0}[(j+i) \% tab.length]$
-sont déplacés aux indices $((j*decalage)+i) \% tab.length)$
+$\bigwedge$ & $\forall j \in \mathbb{Z} \mid j < \frac{\mathrm{tab.length}}{\mathrm{pgcd}}$ \\
+$\Rightarrow$ & les éléments aux indices $tab_{0}[(j+i) \% tab.length]$ sont déplacés aux indices $((j*decalage)+i) \% tab.length$
 \end{tabular}
 
 \{Pre\} Init \{Inv\}
@@ -20,24 +18,22 @@ qu'aucun élément n'est déplacé au sein de tab.
 
 L'invariant est donc vérifié sur INIT.
 
-\{Inv && !H\} Iter \{Inv}
+\{Inv \&\& !H \} Iter \{Inv\}
 
 A chaque itération, switchCadran2 est appelé avec les arguments : tab,
 switchDone (incrémenté), decalage et tab.length / pgcd. De ce fait,
 selon la spécification de switchCadran2 prouvé précédemment, nous avons
 que chaque élément $x \in [0\cdots
     \frac{\mathrm{tab.length}}{\mathrm{pgcd}}[$ sont déplacés à la
-        position $(x*\mathrm{decal})+i \% \mathrm{tab.length}$ avec $i <
-        \mathrm{switchDone}$
+        position $(x*\mathrm{decal})+i \% \mathrm{tab.length}$ avec $i < \mathrm{switchDone}$
 
 On a donc que les éléments aux indices
 $tab_{0}[(j+i)\%\mathrm{tab.length}]$ sont déplacés aux indices
 $((j*decalage) + i) \% \mathrm{tab.length}$ pour chaque $i <
 \mathrm{switchDone}$
-et $j \leq \frac{\mathrm{tab.length}{\mathrm{pgcd}}$
+et $j \leq \frac{\mathrm{tab.length}}{\mathrm{pgcd}}$
 
-\{Inv \&\& H\} Clot \{Post\} Nous avons que switchDone=pgcd ce qui
-implique qu'on a déplacé
+\{Inv \&\& H\} Clot \{Post\} Nous avons que switchDone=pgcd ce qui implique qu'on a déplacé
 $\mathrm{pgcd}*\frac{\mathrm{tab.length}}{\mathrm{pgcd}}$ éléments et
 que chacun d'entre eux est déplacé une et une seule fois (comme démontré
 plus haut). Tous les élémetnts de tab sont donc déplacés de décal positions.
