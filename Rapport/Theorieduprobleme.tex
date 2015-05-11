@@ -1,5 +1,6 @@
-Pour prouver la validité de notre programme, nous l'avons séparé en deux sous problèmes que nous aborderons séparément. La correction partielle et preuve de terminaison de ces deux sous-problèmes prouvera que le programme en entier est correct.\\
 Dans le problème du cadran, il faut montrer que toutes les positions du tableau initiales seront déplacées de la valeur du déplacement. Notons le déplacement $A$ et la longueur $B$ du tableau donné en input. Nous allons aborder ce problème en deux sous-problèmes: si $A$ et $B$ sont premiers entre eux et s'ils ne le sont pas.\\  
+
+Comme expliqué dans la section ci-dessus, nous voulons décomposer le cadran en différentes parties ayant la même taille. Dans cette partie nous allons montrer que nous pouvons déplacer les éléments de A positions, comme expliqué ci-dessus, sans repasser sur une case déjà visitée. \\
 
 \subsection{A et B premiers entre eux}
 Soient $A$ et $B$, deux nombres entiers positifs non nuls, premiers entre eux, avec $A < B$.\\
