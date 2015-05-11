@@ -22,15 +22,13 @@ $\Rightarrow$ & les éléments aux indices $tab_{0}[(j \times decalage + i) \% t
 \noindent \textbf{Condition d'arrêt: }\\
 switchDone==pgcd \\
 
-\noindent \textbf{Init: }\\
-switchDone := 0;\\
-pgcd := pgcd(tab.length,decalage); \\
+\noindent \begin{tabular}{l|l}
+\textbf{Init: } & \textbf{Iter: }\\
+switchDone := 0; & switchCadran2(tab, switchDone, decalage, tab.length / pgcd); \\
+pgcd := pgcd(tab.length,decalage); & switchDone=switchDone+1;\\
+\end{tabular}\\
 
-\noindent \textbf{Iter: } \\
-switchCadran2(tab, switchDone, decalage, tab.length / pgcd);
-switchDone=switchDone+1;
-
-\noindent \textbf{Clot: } - \\
+\noindent \textbf{Clot: } -
 
 \subsubsection*{\{Pre\} Init \{Inv\}}
 
