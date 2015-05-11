@@ -8,7 +8,7 @@
 
 \noindent \textbf{Environement: }\\
 int switchDone\\
-int pgcd\\
+int PGCD\\
 
 \noindent \textbf{Invariant :}
 
@@ -16,25 +16,25 @@ int pgcd\\
 
 & $\mathrm{decalage}=\mathrm{decalage}_{0}$ \\
 $\dot{\wedge}$ & $\forall i \in \mathbb{Z} \mid i < \mathrm{switchDone} $, $\forall j \in \mathbb{Z} \mid j < \frac{\mathrm{tab.length}}{\mathrm{PGCD}}$ \\
-$\Rightarrow$ & les éléments aux indices $tab_{0}[(j \times decalage + i) \% tab.length]$ sont déplacés aux indices $(((j+1)\times decalage)+i) \% tab.length$ \\
+$\Rightarrow$ & les éléments aux indices $tab_{0}[(j \times \mathrm{decalage} + i) \% \mathrm{tab.length}]$ sont déplacés aux indices $(((j+1)\times \mathrm{decalage})+i) \% \mathrm{tab.length}$ \\
 \end{tabular}\\
 
 \noindent \begin{tabular}{ll}
 \textbf{Init: } & \textbf{Iter: }\\
-switchDone := 0; & switchCadran2(tab, switchDone, decalage, tab.length / pgcd); \\
-pgcd := pgcd(tab.length,decalage); & switchDone=switchDone+1;\\
+switchDone := 0; & switchCadran2(tab, switchDone, decalage, tab.length / PGCD); \\
+PGCD := PGCD(tab.length,decalage); & switchDone := switchDone+1;\\
  & \\
-\textbf{H:}switchDone==pgcd & \textbf{Clot: } -\\
+\textbf{H:}switchDone==PGCD & \textbf{Clot: } -\\
 \end{tabular}\\
 
 \subsubsection*{\{Pre\} Init \{Inv\}}
 
-\{decalage = $decalage_{0}$, tab = tab$_{0}$ [val$_{0}^{0}$, val$_{0}^{1}$, ... ,val$_{0}^{tab.length-1}$])\} tel que \\tab est un tableau d'entiers != null
+\{decalage = decalage$_{0}$, tab = tab$_{0}$ [val$_{0}^{0}$, val$_{0}^{1}$, ... ,val$_{0}^{\mathrm{tab.length}-1}$])\} tel que \\tab est un tableau d'entiers != null
 $\dot{\wedge}$ decalage est un nombre entiers positifs\\
 
-INIT\\
+INIT
 
-\{switchDone = 0, pgcd = PGCD(tab.length, decalage)\} \footnote{Par manque d'espace nous ne prouverons pas l'exactitude de la fonction PGCD mais elle peut être prouvée de la même manière que vue au cours}
+\{switchDone = 0, PGCD = PGCD(tab.length, decalage)\} \footnote{Par manque d'espace nous ne prouverons pas l'exactitude de la fonction PGCD mais elle peut être prouvée de la même manière que vue au cours}
 
 On a bien qu'il n'existe aucun $i < \mathrm{switchDone}$, aucun élément n'est déplacé au sein de tab.
 
@@ -42,7 +42,7 @@ L'invariant est donc vérifié sur INIT.
 
 \subsubsection*{\{Inv \&\& !H \} Iter \{Inv\}}
 
-Nous avons que lors de l'Iter, l'environnement symbolique suivant \{decalage = $decalage_{1}$, tab = tab$_{1}$ [val$_{1}^{0}$, val$_{1}^{1}$, ... ,val$_{1}^{tab.length-1}$])\}
+Nous avons que lors de l'Iter, l'environnement symbolique suivant \{decalage = $decalage_{1}$, tab = tab$_{1}$ [val$_{1}^{0}$, val$_{1}^{1}$, ... ,val$_{1}^{\mathrm{tab.length-1}}$])\}
 
 A chaque itération, switchCadran2 est appelé avec les arguments : tab,
 switchDone (incrémenté), décalage et tab.length / PGCD.
@@ -62,39 +62,40 @@ que chaque élément $x \in [0\cdots
     \frac{\mathrm{tab.length}}{\mathrm{PGCD}}[$ est déplacé à la
         position $(x\times \mathrm{decal})+i \% \mathrm{tab.length}$ avec $i < \mathrm{switchDone}$
 
-On a donc que les éléments aux indices $tab_{0}[(j \times decalage + i) \% tab.length]$ sont déplacés aux indices $(((j+1)\times decalage)+i) \% tab.length$ pour chaque $i < \mathrm{switchDone}$ et $j \leq \frac{\mathrm{tab.length}}{\mathrm{PGCD}}$ 
-A chaque itération, nous avons donc que $switchDone \times \frac {\mathrm{tab.length}}{\mathrm{PGCD}}$ décalages ont été effectué
+On a donc que les éléments aux indices $tab_{0}[(j \times \mathrm{decalage} + i) \% \mathrm{tab.length}]$ sont déplacés aux indices $(((j+1)\times \mathrm{decalage})+i) \% \mathrm{tab.length}$ pour chaque $i < \mathrm{switchDone}$ et $j \leq \frac{\mathrm{tab.length}}{\mathrm{PGCD}}$ 
+A chaque itération, nous avons donc que $\mathrm{switchDone} \times \frac {\mathrm{tab.length}}{\mathrm{PGCD}}$ décalages ont été effectué
 \subsubsection*{\{Inv \&\& H\} Clot \{Post\}}
-Nous avons que lors de l'Iter, l'environnement symbolique suivant \{decalage = $decalage_{1}$, tab = tab$_{1}$ [val$_{1}^{0}$, val$_{1}^{1}$, ... ,val$_{1}^{tab.length-1}$])\}
+Nous avons que lors de l'Iter, l'environnement symbolique suivant \{decalage = $\mathrm{decalage}_{1}$, tab = tab$_{1}$ [val$_{1}^{0}$, val$_{1}^{1}$, ... ,val$_{1}^{\mathrm{tab.length}-1}$])\}
  Nous avons que switchDone=PGCD ce qui implique qu'on a déplacé
 $\mathrm{PGCD}\times \frac{\mathrm{tab.length}}{\mathrm{PGCD}}$ éléments et
 que chacun d'entre eux est déplacé une et une seule fois (comme démontré lors de la théorie du problème). Tous les élémetnts de tab sont donc déplacés de décal positions.
 
 \subsubsection*{Preuve de terminaison}
 
-Variant  : $pgcd - switchDone$
+Variant  : PGCD - switchDone
 
-INIT et INV:  $\Rightarrow 0 \leq switchDone \leq pgcd$ sachant que PGCD ne renvoie que des valeurs positives donc $pgcd - switchDone \geq 0$. Notre variant est bien positif ou nul.\\ 
+INIT et INV:\\
+$\Rightarrow 0 \leq \mathrm{switchDone} \leq$ PGCD sachant que PGCD ne renvoie que des valeurs positives donc $PGCD - \mathrm{switchDone} \geq 0$. Notre variant est bien positif ou nul.\\ 
 
 Vérifions maintenant que notre variant décroit sur Iter. Prenons Inv $\&\&$ !H \\
 
-E = $\{ switchDone = switchDone_{1}, pgcd = pgcd_{1}, tab = tab_{1}\}$\\
-tq $(INV \wedge switchDone_{1} != pgcd_{1})$.\\
+E = $\{$ switchDone = switchDone$_{1}$, PGCD = PGCD$_{1}$, tab = tab$_{1}\}$\\
+tq (INV $\wedge$ switchDone$_{1}$ $\neq$ PGCD$_{1})$.\\
 
 Une seule instruction va nous intéresse ici : \\
 
 \begin{center}
-  $switchDone++;$\\
- \end{center} 
+  switchDone++;\\
+\end{center} 
  
 Cela nous donne un nouvel environnement :\\
 
-E' = $\{switchDone = switchDone_{1}+1, ...\}$ tq (Idem).\\
+E' = $\{$switchDone = switchDone$_{1}$+1, ...\} tq (Idem).\\
 
-$Var(E) = pgcd - switchDone_{1}$
-$Var(E') = pgcd - switchDone = pgcd - (switchDone_{1}+1)$
+Var(E) = PGCD - switchDone$_{1}$
+Var(E') = PGCD - switchDone = PGCD - (switchDone$_{1}+1)$
 
-On a donc : $Var(E) = pgcd - switchDone_{1} > pgcd - (switchDone_1 +1) = pgcd - switchDone = Var(E')$.\\
+On a donc : Var(E) = PGCD - switchDone$_{1}$ > PGCD - (switchDone$_1$ +1) = PGCD - switchDone = Var(E').\\
 
 On a donc bien un variant qui décroit sur Iter.\\
 
