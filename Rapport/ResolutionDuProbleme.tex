@@ -3,6 +3,7 @@ Les Pre, Post, Inv, H sont bien des expressions logiques
 \subsection{Sous-problème 1}
 
 \subsubsection*{Specifications}
+\noindent \textbf{En tête :} public static void switchCadran2(int[] tab, int startIndex, int decalage, int nSwitch)\\
 \noindent \textbf{Pré : } tab est un tableau d'entiers\\
  	  \indent \indent $\dot{\wedge}$ tab != null\\
 	  \indent \indent $\dot{\wedge}$ startIndex est un indice tel que 0 $\leq$ startIndex < tab.length \\
@@ -10,11 +11,10 @@ Les Pre, Post, Inv, H sont bien des expressions logiques
 	  \indent \indent $\dot{\wedge}$ nSwitch est un entier positif 0 $\leq$ nSwitch < tab.length\\
 \textbf{Post :}  le tableau est modifié de manière à ce que les éléments aux positions P$_{i}$ sont déplacés aux positions P$_{i+1}$ pour tout $i$ appartenant à $[0,nSwitch[$ tel que $P_{x} = (startIndex + (decalage\times x))\ mod\ tab.length$\\
 \textbf{Résultat :}  - \\
+\textbf{Environement: } int switchDone, int i, int tmp\\
 
-
-\textbf{Invariant}
-
-	startIndex = startIndex$_{0}$\\
+\noindent \textbf{Invariant:}\\
+\noindent startIndex = startIndex$_{0}$\\
 $\wedge$ $0 \leq$ startIndex < tab.length \\
 $\wedge$ decalage = decalage$_{0}$\\
 $\wedge$ nswitch = nswitch$_{0}$\\
@@ -23,6 +23,22 @@ $\wedge$ $0\leq i < tab.length$\\
 $\wedge$ $i = startindex + ((switchDone+1)\times decalage) \% tab.length$\\
 $\wedge$ $tmp = tab[(startIndex + (switchDone\times decalage))  \% tab.length]$\\
 $\wedge$ Les éléments x$_{j}$ tels que $\forall j$, $j$ dans $Z$, $j<switchDone$ on a $x_{j}=tab_{0}[(startindex + (j\times decalage))\ \% tab.length]$ sont déplacés aux index $(startindex + ((j+1)* decalage))\%tab.length$\\
+
+\noindent \textbf{Condition d'arrêt:} switchDone == nSwitch\\
+
+\noindent \textbf{Init:}\\
+switchDone := 0;\\
+i := (startIndex + decalage) \% tab.length;\\
+tmp := tab[startIndex];\\
+
+\noindent \textbf{Iter: }\\
+tmp := switchUnique(tab, i, tmp);\\
+i := (i+decalage) \% tab.length;\\
+switchDone := switchDone + 1;\\
+
+\noindent \textbf{Clot: } -\\
+
+
 
 \subsubsection*{$\{$Pre$\}$ Init $\{$Inv$\}$}
 
