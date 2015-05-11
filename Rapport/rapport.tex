@@ -10,6 +10,9 @@
 \usetikzlibrary{arrows}
 \geometry{hscale=0.7,vscale=0.75,centering}
 
+\usepackage{listings}
+\lstset{language=Java, frame=single, breaklines=true}
+
 \author{\textit{Groupe 4}\\
 Aymeric De Cocq, Solaiman El Jilali, Léonard Julémont, Florian Thuin}
 \title{LINGI1122 - Méthodes de Conception de Programmes\\
@@ -29,7 +32,7 @@ Problème du cadran}
 \section{Théorie du problème}
 \input{Theorieduprobleme}
 
-\section{Conventions de représentations}
+\section{Conventions de représentation}
 \input{Conventions}
 
 \section{Résolution du problème}
@@ -38,9 +41,7 @@ Problème du cadran}
 
 \input{Solaiman}
 
-\section{Exécution Symbolique}
-
-\section{Variants}
-
+\section{Code Java}
+\lstinputlisting {CadranSansPre.java}
 
 \end{document}
