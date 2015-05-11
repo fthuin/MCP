@@ -161,9 +161,7 @@ Variant  : $tab.length - switchDone$
 
 Inv $\Rightarrow 0 \leq switchDone \leq tab.length$ donc $tab.length - switchDone \geq 0$. Notre variant est bien positif ou nul.\\ 
 
-Vérifions maintenant que notre variant décroit sur Iter.\\
-
-Prenons Inv $\&\&$ !H \\
+Vérifions maintenant que notre variant décroit sur Iter. Prenons Inv $\&\&$ !H \\
 
 E = $\{ switchDone = switchDone_{1}, i = i_{1}, tmp = tmp_{1}, startIndex = startIndex_{1}, decalage = decalage_{1}, nswitch = nswitch_{1}, tab = tab_{1}\}$\\
 tq $(INV \wedge switchDone_{1} != nSwitch_{1})$.\\
@@ -173,7 +171,7 @@ Une seule instruction va nous intéresse ici : \\
 \begin{center}
   $switchDone++;$\\
  \end{center} 
- @
+ 
 Cela nous donne un nouvel environnement :\\
 
 E' = $\{switchDone = switchDone_{1}+1, ...\}$ tq (Idem).\\
