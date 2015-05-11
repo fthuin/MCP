@@ -32,7 +32,7 @@ l'invariant est donc vérifié sur Init
 
 \subsubsection*{$\{$Inv $\&\&$ !H$\}$ Iter $\{$Inv$\}$}
 
-{} tq (startIndex$_{1}$ = startIndex$_{0}$
+$\{\}$ tq (startIndex$_{1}$ = startIndex$_{0}$
 $\wedge$ decalage$_{1}$ = decalage$_{0}$\\
 $\wedge$ nswitch$_{1}$\= nswitch$_{0}$\\
 $\wedge$ tab = tab$_{0}$ [val$_{1}^{0}$, val$_{1}^{1}$, ... val$_{1}^{tab.length}$]\\
@@ -40,4 +40,91 @@ $\wedge$ $0\leq switchDone_{1} < tab.length$\\
 $\wedge$ $0\leq i_{1} < tab.length$\\
 $\wedge$ $i_{1} = startIndex_{1} + (switchDone_{1}+1\times decalage_{1}) \% tab.length$\\
 $\wedge$ $tmp_{1} = tab[(startIndex_{1} + (switchDone_{1}\times decalage_{1}))  \% tab.length]$\\
-$\wedge$ Les éléments x$_{j}$ tels que $Vj$, $j$ dans $Z$, $j<switchDone_{1}$ on a $x_{j}=tab_{0}[(startindex_{1} + (j\times decalage_{1}))\ \% tab.length]$ sont déplacés aux index $(startindex_{1} + ((j+1)* decalage_{1}))\%tab.length$\\
+$\wedge$ Les éléments x$_{j}$ tels que $\forall j$, $j$ dans $Z$, $j<switchDone_{1}$ on a $x_{j}=tab_{0}[(startindex_{1} + (j\times decalage_{1}))\ \% tab.length]$ sont déplacés aux index $(startindex_{1} + ((j+1)* decalage_{1}))\%tab.length$\\
+
+switchUnique peut être appelé car tab est bien un tableau d'entiers, tab est non null et i est un indice valide du tableau. $tmp = switchUnique(tab, i, tmp)$. Donc $tmp = tab_{1}[i_1]$, ce qui correspond à $tmp = tab_{1}[startindex_{1} + ((switchDone_{1}+1)\times decalage_{1}) \% tab.length]$.\\
+
+Le tableau a été modifié : $tab = tab_{1}[val_{1}^{0},val_{1}^{1}, ..., val_{1}^{((i_1)-1)}, tmp_{1}, ...]$.\\
+
+ $i = (i+decalage) \% tab.length$.
+ 
+ Dans l'environnement : $i = i_{1} + decalage \% tab.length = startindex_{1} + ((switchDone_{1}+1)\times decalage_{1}) \% tab.length  + decalage_{1} \%tab.length = startIndex_{1} + ((swhitchDone_{1}+2)\times decalage_{1}) \%tab.length. switchDone++$.\\
+ 
+Après l'ITER, l'environnement devient donc : 
+
+\noindent$\{switchDone = switchDone_{1}+1,\ i = startIndex_{1} + ((swhitchDone_{1}+2)\times decalage_1) \%tab.length,\ tmp = tab_{1}[startindex_{1}$ $+ ((switchDone_{1}+1)\times decalage_{1}) \% tab.length],\ startIndex = startIndex_{1}, decalage = decalage_{1},\ nswitch = nswitch_{1},\ tab = tab_{1}[val_{1}^{0},val_{1}^{1}, ..., val_{1}^{((i_1)-1)}, tmp_{1}, ...]\} tq (...)$.\\
+
+On obtient bien notre invariant:
+\begin{itemize}
+	\item comme switchDone est différent de nSwitch et inférieur ou égal, on sait qu'il est toujours inférieur à tab.length
+	\item $tmp = tab_{1}[startindex_{1} + ((switchDone_{1}+1)\times decalage_{1}) \% tab.length] = tab_{1}[startindex + (switchDone\times decalage) \% tab.length]$
+	\item $i = startIndex_{1} + ((swhitchDone_{1}+2)\times decalage_{1}) \% tab.length = startIndex + ((swhitchDone+1)\times decalage) \%tab.length$
+	\item pour $tab$, on a $tab = tab_{1}[val_{1}^{0},val_{1}^{1}, ..., val_{1}^{((i_{1})-1)}, tmp_{1}, ...]$, avec $tmp_{1} = tab_{1}[(startIndex_{1} + (SwitchDone_{1}\times decalage_{1})) \% tab.length]$, et donc avec le nouvel environnement : $tmp_{1} = tab_{1}[(startIndex + ((switchDone-1)\times decalage)) \% tab.length].$ 
+	\item Grâce à notre invariant nous savons déjà que les éléments $x_{j}$ tels que $\forall j$, $j \in \mathbb{Z}$, $j<switchDone_{1}$ on a $x_{j}=tab_{0}[(startindex_{1} + (j\times decalage_{1})) \% tab.length]$ sont déplacés aux index $(startindex_{1} + ((j+1)\times decalage_{1}))\% tab.length$. On a maintenant $\forall j, j$ dans $\mathbb{Z}$ et $j<switchDone=switchDone_{1} + 1$, donc seul l'élément $x_{j}$ avec $j= switchDone - 1 = switchDone_{1}$ a du être déplacé. Et c'est le cas, il s'agit de l'élément qui était dans $tmp_{1}$ et qui a été placé à l'index :$ startindex_{1} + ((switchDone_{1}+1)\times decalage_{1}) \% tab.length$. Grâce à notre théorie du problème nous savons que cet élément n'est pas un élément qui avait déjà été déplacé. Ceci nous donne donc la dernière conjonction de notre invariant. 
+\end{itemize}
+
+Notre invariant est donc vérifié sur Iter. \\
+
+\subsubsection*{$\{$Inv $\&\&$ H$\}$ Clot $\{$Post$\}$}
+
+$\{switchDone = switchDone_{1}, i = i_{1}, tmp = tmp_{1}, startIndex = startIndex_{1}, decalage = decalage_{1}, nswitch = nswitch_{1}, tab = tab_{1}\}$\\ 
+tq $(startIndex_{1} = startIndex_{0}$\\
+$\wedge$ $0 \leq startIndex < tab.length$\\
+$\wedge$ $decalage_{1} = decalage_{0}$\\
+$\wedge$ $nSwitch_{1} = nSwitch_{0}$\\
+$\wedge$ $0 \leq switchDone_{1} \leq nSwitch_{1} < tab.length$\\
+$\wedge$ $0\leq switchDone_{1} < tab.length$\\
+$\wedge$ $0\leq i_{1} < tab.length$\\
+$\wedge$ $i_{1} = startindex_{1} + ((switchDone_{1}+1)\times decalage_{1}) \% tab.length$\\
+$\wedge$ $tmp_{1} = tab_{1}[(startIndex_{1} + (switchDone_{1}\times decalage_{1}))  \% tab.length]$\\
+$\wedge$ les éléments $x_{j}$ tels que $\forall j, j$ dans $\mathbb{Z}, j<switchDone_{1}$ on a $x_{j}=tab_{0}[(startindex_{1} + (j\times decalage_{1})) \% tab.length]$ sont déplacés aux index ($startindex_{1} + ((j+1)\times  decalage_{1}))\% tab.length$\\
+$\wedge$ $switchDone_{1} == nSwitch_{1})$ \\
+
+La post condition de notre sous problème demande que : le tableau est modifié de manière à ce que les éléments aux positions $P_{i}$ sont déplacés aux positions $P_{i+1}$ pour tout $i$ appartenant à $[0,nSwitch[$ tel que $P_{x} = (startIndex + (decalage\times x)) \% tab.length$.
+
+Comme H est vrai, nous avons $switchDone == nSwitch$. Donc en remplaçant switchDone par nSwitch dans la dernière conjonction de notre invariant, nous savons que : les éléments $x_{j}$ tels que $\forall j, j$ dans $\mathbb{Z}, j<nSwitch$ on a $x_{j}=tab_{0}[(startindex + (j\times decalage)) \% tab.length]$ sont déplacés aux index $(startindex + ((j+1)\times decalage)) \% tab.length.$ 
+Cela correspond exactement à notre postcondition.\\
+
+Nous avons donc vérifié le tripler d'Hoar-Mana, ce qui nous montre que cet invariant est correct pour cet algorithme. 
+Nous avons donc effectué la correction partielle de ce sous problème. 
+
+
+\subsubsection*{Preuve de terminaison}
+Variant  : $tab.length - switchDone$
+
+Inv $\Rightarrow 0 \leq switchDone \leq tab.length$ donc $tab.length - switchDone \geq 0$. Notre variant est bien positif ou nul.\\ 
+
+Vérifions maintenant que notre variant décroit sur Iter.\\
+
+Prenons Inv $\&\&$ !H 
+
+E = $\{ switchDone = switchDone_{1}, i = i_{1}, tmp = tmp_{1}, startIndex = startIndex_{1}, decalage = decalage_{1}, nswitch = nswitch_{1}, tab = tab_{1}\}$\\
+tq $(startIndex_{1} = startIndex_{0}$
+$\wedge$ $0 \leq startIndex < tab.length$\\
+$\wedge$ $decalage_{1} = decalage_{0}$\\
+$\wedge$ $nSwitch_{1} = nSwitch_{0}$\\
+$\wedge$ $0 \leq switchDone_{1} \leq nSwitch_{1} < tab.length$\\ 
+$\wedge$ $0 \leq switchDone_{1} < tab.length$\\
+$\wedge$ $0 \leq i_{1} < tab.length$\\
+$\wedge$ $i_{1} = startindex_{1} + ((switchDone_{1}+1)\times decalage_{1}) \% tab.length$
+$\wedge$ $tmp_{1} = tab_{1}[(startIndex_{1} + (switchDone_{1}\times decalage_{1})) \% tab.length]$
+$\wedge$ les éléments $x_{j}$ tels que $\forall j, j$ dans $\mathbb{Z}$, $j<switchDone_{1}$ on a $x_{j}=tab_{0}[(startindex_{1} + (j\times decalage_{1})) \% tab.length]$ sont déplacés aux index $(startindex_{1} + ((j+1)\times decalage_{1})) \% tab.length$.
+$\wedge$ $switchDone_{1} != nSwitch_{1})$.\\
+
+La seule instruction intéressante est : switchDone++.\\
+Cela nous donne un nouvel environnement :\\
+
+E' = $\{switchDone = switchDone_{1}+1, ...\}$ tq (...).\\
+
+$Var(E) = tab.length - switchDone_{1}$
+$Var(E') = tab.length - switchDone = tab.length - (switchDone_{1}+1)$
+
+On a donc : $Var(E) = tab.length - switchDone_{1} > tab.length - (switchDone_1 +1) = tab.length - switchDone = Var(E')$.\\
+
+On a donc bien un variant qui décroit sur Iter.\\
+
+Ceci nous montre que ce sous problème ce finira toujours. 
+
+
+
+
