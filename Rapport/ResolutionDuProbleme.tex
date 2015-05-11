@@ -31,11 +31,11 @@ La valeur présente à l'indice $j$ de \textit{tab} lors de l'appel à la métho
 
 \subsubsection*{Specifications}
 \noindent \textbf{En tête :} public static void switchCadran2(int[] tab, int startIndex, int decalage, int nSwitch)\\
-\noindent \textbf{Pré : } tab est un tableau d'entiers\\
- 	  \indent \indent $\dot{\wedge}$ tab != null\\
-	  \indent \indent $\dot{\wedge}$ startIndex est un indice tel que 0 $\leq$ startIndex < tab.length \\
-	  \indent \indent $\dot{\wedge}$ decalage est un entier positif \\
-	  \indent \indent $\dot{\wedge}$ nSwitch est un entier positif 0 $\leq$ nSwitch < tab.length\\
+\noindent \textbf{Pré : } tab != null \\
+ 	  \indent \indent $\dot{\wedge}$ tab est un tableau d'entiers\\
+	  \indent \indent $\wedge$ startIndex est un indice tel que 0 $\leq$ startIndex < tab.length \\
+	  \indent \indent $\wedge$ decalage est un entier positif \\
+	  \indent \indent $\wedge$ nSwitch est un entier positif 0 $\leq$ nSwitch $\leq$ tab.length\\
 \textbf{Post :}  le tableau est modifié de manière à ce que les éléments aux positions P$_{i}$ sont déplacés aux positions P$_{i+1}$ pour tout $i$ appartenant à $[0,nSwitch[$ tel que $P_{x} = (startIndex + (decalage\times x))\ mod\ tab.length$\\
 \textbf{Résultat :}  - \\
 \textbf{Environement: } int switchDone, int i, int tmp\\
@@ -45,9 +45,9 @@ La valeur présente à l'indice $j$ de \textit{tab} lors de l'appel à la métho
 $\wedge$ $0 \leq$ startIndex < tab.length \\
 $\wedge$ decalage = decalage$_{0}$\\
 $\wedge$ nswitch = nswitch$_{0}$\\
-$\wedge$ $0\leq switchDone \leq nSwitch < tab.length$\\
+$\wedge$ $0\leq switchDone \leq nSwitch \leq tab.length$\\
 $\wedge$ $0\leq i < tab.length$\\
-$\wedge$ $i = startindex + ((switchDone+1)\times decalage) \% tab.length$\\
+$\wedge$ $i = startIndex + ((switchDone+1)\times decalage) \% tab.length$\\
 $\wedge$ $tmp = tab[(startIndex + (switchDone\times decalage))  \% tab.length]$\\
 $\wedge$ Les éléments x$_{j}$ tels que $\forall j$, $j$ dans $Z$, $j<switchDone$ on a $x_{j}=tab_{0}[(startindex + (j\times decalage))\ \% tab.length]$ sont déplacés aux index $(startindex + ((j+1)* decalage))\%tab.length$\\
 
@@ -79,7 +79,7 @@ INIT \\
 $\{switchDone = 0,\ i = (startIndex_0 + decalage_0)\ \% tab.length, tmp = tab_0[startindex_0]\}$ tq (...)\\
 on a bien : 
 \begin{itemize}
-	\item $0\leq switchDone < tab.length$
+	\item $0\leq switchDone \leq tab.length$
 	\item $i = startindex + (switchDone+1\times decalage)\ \% tab.length $car$ switchDone = 0$
 	\item $tmp = tab[(startIndex + (SwitchDone\times decalage))\ \% tab.length]$ car $switchDone = 0$
 	\item il n'existe pas de $j \in \mathbb{Z}$, $j$< SwitchDone = 0 donc la dernière conjonction de notre invariant est vraie. \\
@@ -94,7 +94,7 @@ $\{ switchDone = switchDone_{1}, i = i_{1}, tmp = tmp_{1}, startIndex = startInd
 $\wedge$ $0 \leq$ startIndex < tab.length \\
 $\wedge$ decalage$_{1}$ = decalage$_{0}$\\
 $\wedge$ nswitch$_{1}$ = nswitch$_{0}$\\
-$\wedge$ $0\leq switchDone_{1} \leq nSwitch_{1} < tab.length$\\
+$\wedge$ $0\leq switchDone_{1} \leq nSwitch_{1} \leq tab.length$\\
 $\wedge$ $0\leq i_{1} < tab.length$\\
 $\wedge$ $i_{1} = startIndex_{1} + (switchDone_{1}+1\times decalage_{1}) \% tab.length$\\
 $\wedge$ $tmp_{1} = tab[(startIndex_{1} + (switchDone_{1}\times decalage_{1}))  \% tab.length]$\\
@@ -143,7 +143,7 @@ Notre invariant est donc vérifié sur Iter. \\
 
 $\{switchDone = switchDone_{1}, i = i_{1}, tmp = tmp_{1}, startIndex = startIndex_{1}, decalage = decalage_{1}, nswitch = nswitch_{1}, tab = tab_{1}\}$\\ 
 tq $(startIndex_{1} = startIndex_{0}$\\
-$\wedge$ $0 \leq startIndex < tab.length$\\
+$\wedge$ $0 \leq startIndex \leq tab.length$\\
 $\wedge$ $decalage_{1} = decalage_{0}$\\
 $\wedge$ $nSwitch_{1} = nSwitch_{0}$\\
 $\wedge$ $0 \leq switchDone_{1} \leq nSwitch_{1} < tab.length$\\
@@ -174,15 +174,15 @@ Prenons Inv $\&\&$ !H \\
 
 E = $\{ switchDone = switchDone_{1}, i = i_{1}, tmp = tmp_{1}, startIndex = startIndex_{1}, decalage = decalage_{1}, nswitch = nswitch_{1}, tab = tab_{1}\}$\\
 tq $(startIndex_{1} = startIndex_{0}$
-$\wedge$ $0 \leq startIndex < tab.length$\\
+$\wedge$ $0 \leq startIndex \leq tab.length$\\
 $\wedge$ $decalage_{1} = decalage_{0}$\\
 $\wedge$ $nSwitch_{1} = nSwitch_{0}$\\
 $\wedge$ $0 \leq switchDone_{1} \leq nSwitch_{1} < tab.length$\\ 
 $\wedge$ $0 \leq switchDone_{1} < tab.length$\\
 $\wedge$ $0 \leq i_{1} < tab.length$\\
-$\wedge$ $i_{1} = startindex_{1} + ((switchDone_{1}+1)\times decalage_{1}) \% tab.length$
-$\wedge$ $tmp_{1} = tab_{1}[(startIndex_{1} + (switchDone_{1}\times decalage_{1})) \% tab.length]$
-$\wedge$ les éléments $x_{j}$ tels que $\forall j, j$ dans $\mathbb{Z}$, $j<switchDone_{1}$ on a $x_{j}=tab_{0}[(startindex_{1} + (j\times decalage_{1})) \% tab.length]$ sont déplacés aux index $(startindex_{1} + ((j+1)\times decalage_{1})) \% tab.length$.
+$\wedge$ $i_{1} = startindex_{1} + ((switchDone_{1}+1)\times decalage_{1}) \% tab.length$\\
+$\wedge$ $tmp_{1} = tab_{1}[(startIndex_{1} + (switchDone_{1}\times decalage_{1})) \% tab.length]$\\
+$\wedge$ les éléments $x_{j}$ tels que $\forall j, j$ dans $\mathbb{Z}$, $j<switchDone_{1}$ on a $x_{j}=tab_{0}[(startindex_{1} + (j\times decalage_{1})) \% tab.length]$ sont déplacés aux index $(startindex_{1} + ((j+1)\times decalage_{1})) \% tab.length$.\\
 $\wedge$ $switchDone_{1} != nSwitch_{1})$.\\
 
 La seule instruction intéressante est : switchDone++.\\
