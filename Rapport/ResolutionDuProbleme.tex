@@ -166,22 +166,17 @@ Vérifions maintenant que notre variant décroit sur Iter.\\
 Prenons Inv $\&\&$ !H \\
 
 E = $\{ switchDone = switchDone_{1}, i = i_{1}, tmp = tmp_{1}, startIndex = startIndex_{1}, decalage = decalage_{1}, nswitch = nswitch_{1}, tab = tab_{1}\}$\\
-tq $(startIndex_{1} = startIndex_{0}$
-$\wedge$ $0 \leq startIndex \leq tab.length$\\
-$\wedge$ $decalage_{1} = decalage_{0}$\\
-$\wedge$ $nSwitch_{1} = nSwitch_{0}$\\
-$\wedge$ $0 \leq switchDone_{1} \leq nSwitch_{1} < tab.length$\\ 
-$\wedge$ $0 \leq switchDone_{1} < tab.length$\\
-$\wedge$ $0 \leq i_{1} < tab.length$\\
-$\wedge$ $i_{1} = startindex_{1} + ((switchDone_{1}+1)\times decalage_{1}) \% tab.length$\\
-$\wedge$ $tmp_{1} = tab_{1}[(startIndex_{1} + (switchDone_{1}\times decalage_{1})) \% tab.length]$\\
-$\wedge$ les éléments $x_{j}$ tels que $\forall j, j$ dans $\mathbb{Z}$, $j<switchDone_{1}$ on a $x_{j}=tab_{0}[(startindex_{1} + (j\times decalage_{1})) \% tab.length]$ sont déplacés aux index $(startindex_{1} + ((j+1)\times decalage_{1})) \% tab.length$.\\
-$\wedge$ $switchDone_{1} != nSwitch_{1})$.\\
+tq $(INV \wedge switchDone_{1} != nSwitch_{1})$.\\
 
-La seule instruction intéressante est : switchDone++.\\
+Une seule instruction va nous intéresse ici : \\
+
+\begin{center}
+  $switchDone++;$\\
+ \end{center} 
+ @
 Cela nous donne un nouvel environnement :\\
 
-E' = $\{switchDone = switchDone_{1}+1, ...\}$ tq (...).\\
+E' = $\{switchDone = switchDone_{1}+1, ...\}$ tq (Idem).\\
 
 $Var(E) = tab.length - switchDone_{1}$
 $Var(E') = tab.length - switchDone = tab.length - (switchDone_{1}+1)$
