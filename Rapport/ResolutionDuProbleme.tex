@@ -4,10 +4,10 @@ Les Pre, Post, Inv, H sont bien des expressions logiques
 
 \subsubsection*{Specifications}
 \noindent \textbf{Pré : } tab est un tableau d'entiers\\
- 	  \indent \indent $\wedge$ tab != null\\
-	  \indent \indent $\wedge$ startIndex est un indice tel que 0 <= startIndex < tab.length \\
-	  \indent \indent $\wedge$ décalage est un entier positif \\
-	  \indent \indent $\wedge$ nSwitch est un entier positif 0 <= nSwitch < tab.length\\
+ 	  \indent \indent $\dot{\wedge}$ tab != null\\
+	  \indent \indent $\dot{\wedge}$ startIndex est un indice tel que 0 $\leq$ startIndex < tab.length \\
+	  \indent \indent $\dot{\wedge}$ decalage est un entier positif \\
+	  \indent \indent $\dot{\wedge}$ nSwitch est un entier positif 0 $\leq$ nSwitch < tab.length\\
 \textbf{Post :}  le tableau est modifié de manière à ce que les éléments aux positions P$_{i}$ sont déplacés aux positions P$_{i+1}$ pour tout $i$ appartenant à $[0,nSwitch[$ tel que $P_{x} = (startIndex + (decalage\times x))\ mod\ tab.length$\\
 \textbf{Résultat :}  - \\
 
