@@ -3,7 +3,7 @@ Les Pre, Post, Inv, H sont bien des expressions logiques
 \subsection{Sous-problème 1}
 
 \subsubsection*{Specifications}
-\noindent \textbf{Pré : } tab est un tableau d'entiers\\
+\textbf{Pré : } tab est un tableau d'entiers\\
  	  \indent \indent $\wedge$ tab != null\\
 	  \indent \indent $\wedge$ startIndex est un indice tel que 0 <= startIndex < tab.length \\
 	  \indent \indent $\wedge$ décalage est un entier positif \\
@@ -26,10 +26,10 @@ $\wedge$ Les éléments x$_{j}$ tels que $\forall j$, $j$ dans $Z$, $j<switchDon
 
 \subsubsection*{$\{$Pre$\}$ Init $\{$Inv$\}$}
 
-$\{startIndex = startIndex_{0}, decalage = decalage_{0}, nswitch = nswitch_{0} }$ tq (startIndex$_{1}$ = startIndex$_{0}$ \\
+$\{startIndex = startIndex_{0}, decalage = decalage_{0}, nswitch = nswitch_{0} \}$ tq (startIndex$_{1}$ = startIndex$_{0}$ \\
 $\wedge$ decalage$_{1}$ = decalage$_{0}$\\
 $\wedge$ nswitch$_{1}$ = nswitch$_{0}$\\
-$\wedge$ tab = tab$_{0}$ [val$_{1}^{0}$, val$_{1}^{1}$, ... val$_{1}^{tab.length-1}$])\\
+$\wedge$ tab = tab$_{0}$ [val$_{1}^{0}$, val$_{1}^{1}$, ... ,val$_{1}^{tab.length-1}$])\\
 
 INIT
 
@@ -39,7 +39,7 @@ on a bien :
 	\item $0\leq switchDone < tab.length$
 	\item $i = startindex + (switchDone+1\times decalage)\ \% tab.length $car$ switchDone = 0$
 	\item $tmp = tab[(startIndex + (SwitchDone\times decalage))\ \% tab.length]$ car $switchDone = 0$
-	\item il n'existe pas de $j \in \mathbb{Z}$, $j$< SwitchDone = 0 donc la dernière conjonction de notre invariant est vraie. 
+	\item il n'existe pas de $j \in \mathbb{Z}$, $j$< SwitchDone = 0 donc la dernière conjonction de notre invariant est vraie. \\
 \end{itemize}
 
 
@@ -47,21 +47,29 @@ L'invariant est donc vérifié sur Init.
 
 \subsubsection*{$\{$Inv $\&\&$ !H$\}$ Iter $\{$Inv$\}$}
 
-$\{\}$ tq (startIndex$_{1}$ = startIndex$_{0}$
+$\{ switchDone = switchDone_{1}, i = i_{1}, tmp = tmp_{1}, startIndex = startIndex_{1}, decalage = decalage_{1}, nswitch = nswitch_{1}, tab = tab_{1} \}$ tq (startIndex$_{1}$ = startIndex$_{0}$\\
+$\wedge$ $0 \leq$ startIndex < tab.length \\
 $\wedge$ decalage$_{1}$ = decalage$_{0}$\\
-$\wedge$ nswitch$_{1}$\= nswitch$_{0}$\\
-$\wedge$ tab = tab$_{0}$ [val$_{1}^{0}$, val$_{1}^{1}$, ... val$_{1}^{tab.length}$]\\
-$\wedge$ $0\leq switchDone_{1} < tab.length$\\
+$\wedge$ nswitch$_{1}$ = nswitch$_{0}$\\
+$\wedge$ $0\leq switchDone_{1} \leq nSwitch_{1} < tab.length$\\
 $\wedge$ $0\leq i_{1} < tab.length$\\
 $\wedge$ $i_{1} = startIndex_{1} + (switchDone_{1}+1\times decalage_{1}) \% tab.length$\\
 $\wedge$ $tmp_{1} = tab[(startIndex_{1} + (switchDone_{1}\times decalage_{1}))  \% tab.length]$\\
 $\wedge$ Les éléments x$_{j}$ tels que $\forall j$, $j$ dans $Z$, $j<switchDone_{1}$ on a $x_{j}=tab_{0}[(startindex_{1} + (j\times decalage_{1}))\ \% tab.length]$ sont déplacés aux index $(startindex_{1} + ((j+1)* decalage_{1}))\%tab.length$\\
 
-switchUnique peut être appelé car tab est bien un tableau d'entiers, tab est non null et i est un indice valide du tableau. $tmp = switchUnique(tab, i, tmp)$. Donc $tmp = tab_{1}[i_1]$, ce qui correspond à $tmp = tab_{1}[startindex_{1} + ((switchDone_{1}+1)\times decalage_{1}) \% tab.length]$.\\
+La fonction $switchUnique$ peut être appelé car les pré-conditions sont biens respectées. En effet, tab est bien un tableau d'entiers, tab est non null et $i$ est un indice valide du tableau. \\
 
-Le tableau a été modifié : $tab = tab_{1}[val_{1}^{0},val_{1}^{1}, ..., val_{1}^{((i_1)-1)}, tmp_{1}, ...]$.\\
+\begin{center}
+$tmp = switchUnique(tab, i, tmp)$\\
+\end{center}
 
- $i = (i+decalage) \% tab.length$.
+Donc $tmp = tab_{1}[i_1]$, ce qui correspond à $tmp = tab_{1}[startindex_{1} + ((switchDone_{1}+1)\times decalage_{1}) \% tab.length]$.\\
+
+Le tableau a été modifié : $tab = tab_{1}[val_{1}^{0},val_{1}^{1}, ..., val_{1}^{(i_{1}-1)}, tmp_{1}, ...,,val_{1}^{tab.length-1}]$.\\
+
+\begin{center}
+  $i = (i+decalage) \% tab.length$\\
+ \end{center} 
  
  Dans l'environnement : $i = i_{1} + decalage \% tab.length = startindex_{1} + ((switchDone_{1}+1)\times decalage_{1}) \% tab.length  + decalage_{1} \%tab.length = startIndex_{1} + ((swhitchDone_{1}+2)\times decalage_{1}) \%tab.length. switchDone++$.\\
  
