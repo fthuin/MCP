@@ -1,16 +1,24 @@
 \subsection{Sous-problème 2}
+\subsubsection*{Spécifications}
 
-Invariant :
+\noindent \textbf{Pré :} tab est un tableau d'entiers\\
+\indent \indent $\wedge$ decalage est un nombre d'entiers positifs\\
+\textbf{Post :} tous les éléments du tableau aux positions i sont déplacés aux positions (i+decalage \% tab.length)\\
+\textbf{Résultat :} - \\
+
+
+
+\textbf{Invariant :}
 
 \begin{tabular}{ll}
 
 & $\mathrm{decalage}=\mathrm{decalage}_{0}$ \\
-$\dot{\bigwedge}$ & $\forall i \in \mathbb{Z} \mid i < \mathrm{switchDone} $ \\
-$\dot{\bigwedge}$ & $\forall j \in \mathbb{Z} \mid j < \frac{\mathrm{tab.length}}{\mathrm{PGCD}}$ \\
-$\Rightarrow$ & les éléments aux indices $tab_{0}[(j+i) \% tab.length]$ sont déplacés aux indices $((j\times decalage)+i) \% tab.length$
+$\dot{\wedge}$ & $\forall i \in \mathbb{Z} \mid i < \mathrm{switchDone} $ \\
+$\dot{\wedge}$ & $\forall j \in \mathbb{Z} \mid j < \frac{\mathrm{tab.length}}{\mathrm{PGCD}}$ \\
+$\Rightarrow$ & les éléments aux indices $tab_{0}[(j+i) \% tab.length]$ sont déplacés aux indices $((j\times decalage)+i) \% tab.length$ \\
 \end{tabular}
 
-\{Pre\} Init \{Inv\}
+\subsubsection*{\{Pre\} Init \{Inv\}}
 
 $\{decalage=decalage_{0}, PGCD =\cdots, switchDone=0$
 $PGCD_{1} = \cdots$
@@ -20,7 +28,7 @@ qu'aucun élément n'est déplacé au sein de tab.
 
 L'invariant est donc vérifié sur INIT.
 
-\{Inv \&\& !H \} Iter \{Inv\}
+\subsubsection*{\{Inv \&\& !H \} Iter \{Inv\}}
 
 A chaque itération, switchCadran2 est appelé avec les arguments : tab,
 switchDone (incrémenté), décalage et tab.length / PGCD. De ce fait,
@@ -35,7 +43,13 @@ $((j\times decalage) + i) \% \mathrm{tab.length}$ pour chaque $i <
 \mathrm{switchDone}$
 et $j \leq \frac{\mathrm{tab.length}}{\mathrm{PGCD}}$
 
-\{Inv \&\& H\} Clot \{Post\} Nous avons que switchDone=PGCD ce qui implique qu'on a déplacé
+\subsubsection*{\{Inv \&\& H\} Clot \{Post\}}
+
+ Nous avons que switchDone=PGCD ce qui implique qu'on a déplacé
 $\mathrm{PGCD}\times \frac{\mathrm{tab.length}}{\mathrm{PGCD}}$ éléments et
 que chacun d'entre eux est déplacé une et une seule fois (comme démontré
 plus haut). Tous les élémetnts de tab sont donc déplacés de décal positions.
+
+\subsubsection*{Preuve de terminaison}
+TODO: Preuve de terminaison
+%TODO Preuve de terminaison
