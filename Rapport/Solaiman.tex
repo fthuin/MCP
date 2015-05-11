@@ -1,7 +1,7 @@
 \subsection{Problème principal}
 \subsubsection*{Spécifications}
 \noindent \textbf{En-tête :} public static void switchCadran(int[] tab, int decalage)\\
-\noindent \textbf{Pré :} tab est un tableau d'entiers\\
+\noindent \textbf{Pré :} tab est un tableau d'entiers != null\\
 \indent $\dot{\wedge}$ decalage est un nombre entiers positifs\\
 \textbf{Post :} tous les éléments du tableau aux positions i sont déplacés aux positions (i+decalage \% tab.length)\\
 \textbf{Résultat :} - \\
@@ -15,9 +15,8 @@ int pgcd\\
 \begin{tabular}{lp{14cm}}
 
 & $\mathrm{decalage}=\mathrm{decalage}_{0}$ \\
-$\dot{\wedge}$ & $\forall i \in \mathbb{Z} \mid i < \mathrm{switchDone} $ \\
-$\dot{\wedge}$ & $\forall j \in \mathbb{Z} \mid j < \frac{\mathrm{tab.length}}{\mathrm{PGCD}}$ \\
-$\Rightarrow$ & les éléments aux indices $tab_{0}[(j+i) \% tab.length]$ sont déplacés aux indices $((j\times decalage)+i) \% tab.length$ \\
+$\dot{\wedge}$ & $\forall i \in \mathbb{Z} \mid i < \mathrm{switchDone} $, $\forall j \in \mathbb{Z} \mid j < \frac{\mathrm{tab.length}}{\mathrm{PGCD}}$ \\
+$\Rightarrow$ & les éléments aux indices $tab_{0}[(j \times decalage + i) \% tab.length]$ sont déplacés aux indices $(((j+1)\times decalage)+i) \% tab.length$ \\
 \end{tabular}\\
 
 \noindent \textbf{Condition d'arrêt: }\\
@@ -27,15 +26,22 @@ switchDone==pgcd \\
 switchDone := 0;\\
 pgcd := pgcd(tab.length,decalage); \\
 
+\noindent \textbf{Iter: } \\
+switchCadran2(tab, switchDone, decalage, tab.length / pgcd);
+switchDone=switchDone+1;
+
 \noindent \textbf{Clot: } - \\
 
 \subsubsection*{\{Pre\} Init \{Inv\}}
 
-$\{decalage=decalage_{0}, PGCD =\cdots, switchDone=0$
-$PGCD_{1} = \cdots$
+\{decalage = $decalage_{0}$ \}
+$\wedge$ tab = tab$_{0}$ [val$_{1}^{0}$, val$_{1}^{1}$, ... ,val$_{1}^{tab.length-1}$])\\
 
-On a bien qu'il n'existe aucun $i < \mathrm{switchDone}$ et donc
-qu'aucun élément n'est déplacé au sein de tab.@
+INIT
+
+\{switchDone = 0, pgcd = PGCD(tab.length, decalage)\} \footnote{Par manque d'espace nous ne prouverons pas l'exactitude de la fonction PGCD mais elle peut être prouvée de la même manière que vue au cours}
+
+On a bien qu'il n'existe aucun $i < \mathrm{switchDone}$, aucun élément n'est déplacé au sein de tab.
 
 L'invariant est donc vérifié sur INIT.
 
@@ -45,14 +51,10 @@ A chaque itération, switchCadran2 est appelé avec les arguments : tab,
 switchDone (incrémenté), décalage et tab.length / PGCD. De ce fait,
 selon la spécification de switchCadran2 prouvé précédemment, nous avons
 que chaque élément $x \in [0\cdots
-    \frac{\mathrm{tab.length}}{\mathrm{PGCD}}[$ sont déplacés à la
+    \frac{\mathrm{tab.length}}{\mathrm{PGCD}}[$ est déplacé à la
         position $(x\times \mathrm{decal})+i \% \mathrm{tab.length}$ avec $i < \mathrm{switchDone}$
 
-On a donc que les éléments aux indices
-$tab_{0}[(j+i)\%\mathrm{tab.length}]$ sont déplacés aux indices
-$((j\times decalage) + i) \% \mathrm{tab.length}$ pour chaque $i <
-\mathrm{switchDone}$
-et $j \leq \frac{\mathrm{tab.length}}{\mathrm{PGCD}}$
+On a donc que les éléments aux indices $tab_{0}[(j \times decalage + i) \% tab.length]$ sont déplacés aux indices $(((j+1)\times decalage)+i) \% tab.length$ pour chaque $i < \mathrm{switchDone}$ et $j \leq \frac{\mathrm{tab.length}}{\mathrm{PGCD}}$ 
 
 \subsubsection*{\{Inv \&\& H\} Clot \{Post\}}
 
