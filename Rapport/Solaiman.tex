@@ -53,7 +53,7 @@ que chaque élément $x \in [0\cdots
         position $(x\times \mathrm{decal})+i \% \mathrm{tab.length}$ avec $i < \mathrm{switchDone}$
 
 On a donc que les éléments aux indices $tab_{0}[(j \times decalage + i) \% tab.length]$ sont déplacés aux indices $(((j+1)\times decalage)+i) \% tab.length$ pour chaque $i < \mathrm{switchDone}$ et $j \leq \frac{\mathrm{tab.length}}{\mathrm{PGCD}}$ 
-
+A chaque itération, nous avons donc que $switchDone \times \frac {\mathrm{tab.length}}{\mathrm{PGCD}}$ décalages ont été effectué
 \subsubsection*{\{Inv \&\& H\} Clot \{Post\}}
 
  Nous avons que switchDone=PGCD ce qui implique qu'on a déplacé
