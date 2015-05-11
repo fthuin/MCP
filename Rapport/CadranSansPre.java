@@ -4,9 +4,10 @@ public static int abs(int a){
 	
 public static int pgcd(int a, int b) {
   a = abs(a); b = abs(b);
-  while (a!=b)  
-	  if (a>b){a=a-b;}
-	  else {b=b-a;}
+  while (a!=b) { 
+	  if (a>b) a=a-b;
+	  else b=b-a;
+  }
   return(a);}
 
 public static int switchUnique(int[] tab, int j, int tmp) {
