@@ -1,7 +1,4 @@
-%\subsection{Problème général}
-
-Les Pre, Post, Inv, H sont bien des expressions logiques
-
+Nous pouvons maintenant présenter la solution au problème. Pour cela, nous utilisons deux sous-problèmes. 
 \subsection{Sous-problème 1}
 
 \subsubsection{Spécifications}
@@ -9,8 +6,7 @@ Les Pre, Post, Inv, H sont bien des expressions logiques
 \paragraph{Pré :}
 
 \begin{tabular}{ll}
-  & \textit{tab} est un tableau d'entiers \\
-  $\dot{\wedge}$ & tab != null \\
+  & tab != null  $\dot{\wedge}$ \textit{tab} est un tableau d'entiers \\
   $\dot{\wedge}$ & $j$ est un indice tel que $0 \le j < \mathrm{tab.length}$
 \end{tabular}
 
@@ -24,12 +20,13 @@ La valeur présente à l'indice $j$ de \textit{tab} lors de l'appel à la métho
 
 \paragraph{ \{Pré\} Instructions \{Post\} }
 
-\{tab = $tab_{0}$, j = $j_{0}$, tmp = $tmp_{0}$\}
-\{$tmp2_{1}$ = tab[$j_{0}$], $tab_{0}$[j] = $tmp_{0}$\}
+\{tab = $tab_{0}$, j = $j_{0}$, tmp = $tmp_{0}$\} $\rightarrow$ \{$tmp2_{1}$ = tab[$j_{0}$], $tab_{0}$[j] = $tmp_{0}$, ...\}
 
 L'exécution symbolique prouve que les instructions permettent d'arriver à la postcondition lorsque la précondition est respectée. Le résultat renvoyé est la valeur dans tmp2 qui contient bien la valeur prévue par le résultat.
 
 \subsection{Sous-problème 2}
+
+Ce deuxième sous-problème à pour but de déplacer les éléments à la position $startIndex$ de leur partie (comme expliqué dans la section \og Idée Générale \fg{} ), vers ce même index dans un autre partie, ce qui correspond à un déplacement de \og décalage \fg{}  positions .
 
 \subsubsection*{Specifications}
 \noindent \textbf{En tête :} public static void switchCadran2(int[] tab, int startIndex, int decalage, int nSwitch)\\
@@ -66,8 +63,8 @@ tmp := tab[startIndex]; & switchDone := switchDone + 1;\\
 \subsubsection*{$\{$Pre$\}$ Init $\{$Inv$\}$}
 
 $\{$startIndex = startIndex$_{0}$, decalage = decalage$_{0}$, nswitch = nswitch$_{0} \}$\\
-tq (startIndex$_{1}$ = startIndex$_{0}$ \\
-$\wedge$ decalage$_{1}$ = decalage$_{0}$\\
+tq (startIndex$_{1}$ = startIndex$_{0}$
+$\wedge$ decalage$_{1}$ = decalage$_{0}$
 $\wedge$ nswitch$_{1}$ = nswitch$_{0}$\\
 $\wedge$ tab = tab$_{0}$ $[$val$_{1}^{0}$, val$_{1}^{1}$, ... ,val$_{1}^{\mathrm{tab.length-1}}])$\\
 
@@ -77,7 +74,7 @@ $\{$switchDone$ = 0,\ i = ($startIndex$_0$ + decalage$_0)\ \% $tab.length, tmp =
 on a bien : 
 \begin{itemize}
 	\item $0\leq$ switchDone $\leq$ tab.length
-	\item $i$ = startindex + (switchDone$+1\times$ decalage)\% tab.length car switchDone = 0
+	\item $i$ = startindex + ((switchDone$+1)\times$ decalage)\% tab.length car switchDone = 0
 	\item tmp = tab[(startIndex + (SwitchDone$\times$ decalage))\% tab.length] car switchDone $= 0$
 	\item il n'existe pas de $j \in \mathbb{Z}$, $j$< SwitchDone = 0 donc la dernière conjonction de notre invariant est vraie. \\
 \end{itemize}
@@ -98,7 +95,7 @@ $\wedge$ tmp$_{1}$ = tab[(startIndex$_{1}$ + (switchDone$_{1}\times$  decalage$_
 $\wedge$ Les éléments x$_{j}$ tels que $\forall j$, $j$ dans $Z$, $j<$switchDone$_{1}$ on a $x_{j}$=tab$_{0}$[(startindex$_{1} + (j\times$ decalage$_{1}$)) $\%$ tab.length] sont déplacés aux index (startindex$_{1}$ + ($(j+1)\times$ decalage$_{1}$))$\%$tab.length\\
 $\wedge$ switchDone$_{1} \neq$ nSwitch$_{1}$ )\\
 
-La fonction $switchUnique$ peut être appelé car les pré-conditions sont biens respectées. En effet, tab est bien un tableau d'entiers, tab est non null et $i$ est un indice valide du tableau. \\
+La fonction $switchUnique$ peut être appelé car les pré-conditions sont biens respectées. En effet, tab est bien un tableau d'entiers, tab est non null et $i$ est un indice valide du tableau. 
 
 \begin{center}
 tmp = switchUnique(tab, $i$, tmp);\\
@@ -106,13 +103,13 @@ tmp = switchUnique(tab, $i$, tmp);\\
 
 Donc tmp = tab$_{1}[i_1]$, ce qui correspond à tmp = tab$_{1}$[startindex$_{1}$ + ((switchDone$_{1}+1)\times$ decalage$_{1}$) $\%$ tab.length].\\
 
-Le tableau a été modifié : tab = tab$_{1}$[val$_{1}^{0}$,val$_{1}^{1}$, ..., val$_{1}^{(i_{1}-1)}$, tmp$_{1}$, ...,val$_{1}^{\mathrm{tab.length-1}}]$.\\
+Le tableau a été modifié : tab = tab$_{1}$[val$_{1}^{0}$,val$_{1}^{1}$, ..., val$_{1}^{(i_{1}-1)}$, tmp$_{1}$, ...,val$_{1}^{\mathrm{tab.length-1}}]$.
 
 \begin{center}
   $i = (i+$decalage) $\%$ tab.length;\\
 \end{center} 
  
- Dans l'environnement : i = i$_{1}$ + decalage \% tab.length = startindex$_{1}$ + ((switchDone$_{1}+1)\times$ decalage$_{1}$) $\%$ tab.length  + decalage$_{1}$ $\%$ tab.length = startIndex$_{1}$ + ((swhitchDone$_{1}+2)\times$ decalage$_{1}$) $\%$tab.length.\\
+ Dans l'environnement : i = (i$_{1}$ + decalage) \% tab.length = (startindex$_{1}$ + ((switchDone$_{1}+1)\times$ decalage$_{1}$) $\%$ tab.length)  + (decalage$_{1}$ $\%$ tab.length) = startIndex$_{1}$ + ((swhitchDone$_{1}+2)\times$ decalage$_{1}$) $\%$tab.length.
  
 \begin{center}
 switchDone++;\\
@@ -120,8 +117,9 @@ switchDone++;\\
  
 Après l'ITER, l'environnement devient donc : \\
 
-\noindent$\{$switchDone = switchDone$_{1}+1$, i = startIndex$_{1}$ + ((switchDone$_{1}+2)\times$ decalage$_1$) \% tab.length,\\
-tmp = tab$_{1}$[startindex$_{1}$ + ((switchDone$_{1}+1)\times$ decalage$_{1}$) \% tab.length], startIndex = startIndex$_{1}$, decalage = decalage$_{1}$, nswitch = nswitch$_{1}$, tab = tab$_{1}$[val$_{1}^{0}$,val$_{1}^{1}$, ..., val$_{1}^{(i_{1}-1)}$, tmp$_{1}$, ...,val$_{1}^{\mathrm{tab.length}-1}]\}\\$
+\noindent$\{$switchDone = switchDone$_{1}+1$, i = startIndex$_{1}$ + ((switchDone$_{1}+2)\times$ decalage$_1$) \% tab.length,
+tmp = tab$_{1}$[startindex$_{1}$ + ((switchDone$_{1}+1)\times$ decalage$_{1}$) \% tab.length], \\
+startIndex = startIndex$_{1}$, decalage = decalage$_{1}$, nswitch = nswitch$_{1}$, tab = tab$_{1}$[val$_{1}^{0}$,val$_{1}^{1}$, ..., val$_{1}^{(i_{1}-1)}$, tmp$_{1}$, ...,val$_{1}^{\mathrm{tab.length}-1}]\}$\\
 tq (Idem)\\
 
 On obtient bien notre invariant:
@@ -154,16 +152,15 @@ Nous avons donc effectué la correction partielle de ce sous problème.
 
 
 \subsubsection*{Preuve de terminaison}
-Variant  : tab.length - switchDone\\
+\textbf{Variant}  : tab.length - switchDone\\
 
 Inv $\Rightarrow 0 \leq$ switchDone $\leq$ tab.length donc tab.length - switchDone $\geq 0$. Notre variant est bien positif ou nul.\\ 
 
 Vérifions maintenant que notre variant décroit sur Iter. Prenons Inv $\&\&$ !H \\
 
-E = $\{ $switchDone = switchDone$_{1}, i = i_{1}$, tmp = tmp$_{1}$, startIndex = startIndex$_{1}$, decalage = decalage$_{1}$, nswitch = nswitch$_{1}$, tab = tab$_{1}\}$\\
-tq (INV $\wedge$ switchDone$_{1} \neq$ nSwitch$_{1})$.\\
+E = $\{ $switchDone = switchDone$_{1}, i = i_{1}$, tmp = tmp$_{1}$, startIndex = startIndex$_{1}$, decalage = decalage$_{1}$, nswitch = nswitch$_{1}$, tab = tab$_{1}\}$ tq (INV $\wedge$ switchDone$_{1} \neq$ nSwitch$_{1})$.\\
 
-Une seule instruction va nous intéresse ici : \\
+Une seule instruction va nous intéresse ici : 
 
 \begin{center}
   switchDone++;\\
@@ -182,7 +179,9 @@ On a donc bien un variant qui décroit sur Iter.\\
 
 Ceci nous montre que ce sous-problème se finira toujours. 
 
-Nous avons donc fini la correction partielle et prouvé que cet algorithme s'arrête toujours. On peut donc en conclure que cet algorithme est correct, suivant ces spécifications. \\
+\subsubsection*{Conclusion}
+
+Nous avons donc fini la correction partielle et prouvé que ce sous-problème s'arrête toujours. On peut donc en conclure que cet algorithme est correct, suivant ces spécifications. 
 
 
 
