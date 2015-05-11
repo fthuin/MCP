@@ -1,14 +1,16 @@
 \subsection{Problème principal}
 \subsubsection*{Spécifications}
-
+\noindent \textbf{En-tête :} public static void switchCadran(int[] tab, int decalage)\\
 \noindent \textbf{Pré :} tab est un tableau d'entiers\\
 \indent $\dot{\wedge}$ decalage est un nombre entiers positifs\\
 \textbf{Post :} tous les éléments du tableau aux positions i sont déplacés aux positions (i+decalage \% tab.length)\\
 \textbf{Résultat :} - \\
 
+\noindent \textbf{Environement: }\\
+int switchDone\\
+int pgcd\\
 
-
-\textbf{Invariant :}
+\noindent \textbf{Invariant :}
 
 \begin{tabular}{lp{14cm}}
 
@@ -16,7 +18,16 @@
 $\dot{\wedge}$ & $\forall i \in \mathbb{Z} \mid i < \mathrm{switchDone} $ \\
 $\dot{\wedge}$ & $\forall j \in \mathbb{Z} \mid j < \frac{\mathrm{tab.length}}{\mathrm{PGCD}}$ \\
 $\Rightarrow$ & les éléments aux indices $tab_{0}[(j+i) \% tab.length]$ sont déplacés aux indices $((j\times decalage)+i) \% tab.length$ \\
-\end{tabular}
+\end{tabular}\\
+
+\noindent \textbf{Condition d'arrêt: }\\
+switchDone==pgcd \\
+
+\noindent \textbf{Init: }\\
+switchDone := 0;\\
+pgcd := pgcd(tab.length,decalage); \\
+
+\noindent \textbf{Clot: } - \\
 
 \subsubsection*{\{Pre\} Init \{Inv\}}
 
