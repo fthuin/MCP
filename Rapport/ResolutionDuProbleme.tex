@@ -1,0 +1,43 @@
+\subsection{Problème général}
+Les Pre, Post, Inv, H sont bien des expressions logiques 
+\subsection{Sous-problème 1}
+\textbf{Invariant}
+
+	startIndex = startIndex$_{0}$\\
+$\wedge$ decalage = decalage$_{0}$\\
+$\wedge$ nswitch = nswitch$_{0}$\\
+$\wedge$ tab = tab$_{0}$ [val$_{1}^{0}$, val$_{1}^{1}$, ... val$_{1}^{tab.length}$]\\
+$\wedge$ $0\leq switchDone < tab.length$\\
+$\wedge$ $0\leq i < tab.length$\\
+$\wedge$ $i = startindex + (switchDone+1\times decalage) \% tab.length$\\
+$\wedge$ $tmp = tab[(startIndex + (switchDone\times decalage))  \% tab.length]$\\
+$\wedge$ Les éléments x$_{j}$ tels que $Vj$, $j$ dans $Z$, $j<switchDone$ on a $x_{j}=tab_{0}[(startindex + (j\times decalage))\ \% tab.length]$ sont déplacés aux index $(startindex + ((j+1)* decalage))\%tab.length$\\
+
+\subsubsection*{$\{$Pre$\}$ Init $\{$Inv$\}$}
+
+$\{\}$ tq (startIndex = startIndex$_{0}$) \\
+$\wedge$ decalage$_{1}$ = decalage$_{0}$\\
+$\wedge$ nswitch$_{1}$ = nswitch$_{0}$\\
+$\wedge$ tab = tab$_{0}$ [val$_{1}^{0}$, val$_{1}^{1}$, ... val$_{1}^{tab.length}$]\\
+
+
+{$switchDone = 0,\ i = (startIndex_0 + decalage_0)\ \% tab.length, tmp = tab_0[startindex_0]$}\\
+on a bien : 
+\begin{itemize}
+	\item $0\leq switchDone < tab.length$
+	\item $i = startindex + (switchDone+1\times decalage)\ \% tab.length $car$ switchDone = 0$
+	\item $tmp = tab[(startIndex + (SwitchDone\times decalage))\ \% tab.length]$ car $switchDone = 0$
+\end{itemize}
+l'invariant est donc vérifié sur Init
+
+\subsubsection*{$\{$Inv $\&\&$ !H$\}$ Iter $\{$Inv$\}$}
+
+{} tq (startIndex$_{1}$ = startIndex$_{0}$
+$\wedge$ decalage$_{1}$ = decalage$_{0}$\\
+$\wedge$ nswitch$_{1}$\= nswitch$_{0}$\\
+$\wedge$ tab = tab$_{0}$ [val$_{1}^{0}$, val$_{1}^{1}$, ... val$_{1}^{tab.length}$]\\
+$\wedge$ $0\leq switchDone_{1} < tab.length$\\
+$\wedge$ $0\leq i_{1} < tab.length$\\
+$\wedge$ $i_{1} = startIndex_{1} + (switchDone_{1}+1\times decalage_{1}) \% tab.length$\\
+$\wedge$ $tmp_{1} = tab[(startIndex_{1} + (switchDone_{1}\times decalage_{1}))  \% tab.length]$\\
+$\wedge$ Les éléments x$_{j}$ tels que $Vj$, $j$ dans $Z$, $j<switchDone_{1}$ on a $x_{j}=tab_{0}[(startindex_{1} + (j\times decalage_{1}))\ \% tab.length]$ sont déplacés aux index $(startindex_{1} + ((j+1)* decalage_{1}))\%tab.length$\\
