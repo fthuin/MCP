@@ -1,6 +1,33 @@
-\subsection{Problème général}
-Les Pre, Post, Inv, H sont bien des expressions logiques 
+%\subsection{Problème général}
+
+Les Pre, Post, Inv, H sont bien des expressions logiques
+
 \subsection{Sous-problème 1}
+
+\subsubsection{Spécifications}
+
+\paragraph{Pré :}
+
+\begin{tabular}{ll}
+  & \textit{tab} est un tableau d'entiers \\
+  $\dot{\wedge}$ & tab != null \\
+  $\dot{\wedge}$ & j est un indice tel que $0 \le j < \mathrm{tab.length}$
+\end{tabular}
+
+\paragraph{Post :}
+
+Le tableau est modifié de manière que \textit{tmp} a été placé à l'indice $j$ du tableau \textit{tab}.
+
+\paragraph{Résultat :}
+
+La valeur présente à l'indice $j$ de \textit{tab} lors de l'appel à la méthode est renvoyée.
+
+\paragraph{ \{Pré\} Instructions \{Post\} }
+
+\{tab = $tab_{0}$, j = $j_{0}$, tmp = $tmp_{0}$\}
+\{$tmp2_{1}$ = tab[$j_{0}$], $tab_{0}$[j] = $tmp_{0}$\}
+
+\subsection{Sous-problème 2}
 
 \subsubsection*{Specifications}
 \noindent \textbf{Pré : } tab est un tableau d'entiers\\
