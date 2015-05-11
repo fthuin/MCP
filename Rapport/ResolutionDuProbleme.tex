@@ -1,7 +1,7 @@
 Nous pouvons maintenant présenter la solution au problème. Pour cela, nous utilisons deux sous-problèmes. 
 \subsection{Sous-problème 1}
 
-\subsubsection{Spécifications}
+\subsubsection*{Spécifications}
 
 \paragraph{Pré :}
 
@@ -18,7 +18,7 @@ Le tableau est modifié de manière que \textit{tmp} a été placé à l'indice 
 
 La valeur présente à l'indice $j$ de \textit{tab} lors de l'appel à la méthode est renvoyée.
 
-\paragraph{ \{Pré\} Instructions \{Post\} }
+\subsubsection*{ \{Pré\} Instructions \{Post\} }
 
 \{tab = $tab_{0}$, j = $j_{0}$, tmp = $tmp_{0}$\} $\rightarrow$ \{$tmp2_{1}$ = tab[$j_{0}$], $tab_{0}$[j] = $tmp_{0}$, ...\}
 
@@ -35,7 +35,8 @@ Ce deuxième sous-problème à pour but de déplacer les éléments à la positi
 	  \indent \indent $\wedge$ startIndex est un indice tel que 0 $\leq$ startIndex < tab.length \\
 	  \indent \indent $\wedge$ decalage est un entier positif \\
 	  \indent \indent $\wedge$ nSwitch est un entier positif 0 $\leq$ nSwitch $\leq$ tab.length\\
-\textbf{Post :}  le tableau est modifié de manière à ce que les éléments aux positions P$_{i}$ sont déplacés aux positions P$_{i+1}$ pour tout $i$ appartenant à $[0,$nSwitch$[$ tel que $P_{x} = ($startIndex$ + ($decalage$\times x))\ mod\ $tab.length\\
+\textbf{Post :}  le tableau est modifié de manière à ce que les éléments aux positions P$_{i}$ sont déplacés aux positions P$_{i+1}$ pour tout $i$ appartenant à $[0,$nSwitch$[$ tel que $P_{x} = ($startIndex$ + ($decalage$\times x))$\\
+\%tab.length\\
 \textbf{Résultat :}  - \\
 \textbf{Environement: } int switchDone, int i, int tmp\\
 
@@ -59,8 +60,8 @@ tmp := tab[startIndex]; & switchDone := switchDone + 1;\\
 \textbf{H:} switchDone == nSwitch & \textbf{Clot: } - \\
 \end{tabular}\\
 
-
-\subsubsection*{$\{$Pre$\}$ Init $\{$Inv$\}$}
+\subsubsection*{Preuve partielle de l'algorithme }
+\textbf{$\{$Pre$\}$ Init $\{$Inv$\}$}
 
 $\{$startIndex = startIndex$_{0}$, decalage = decalage$_{0}$, nswitch = nswitch$_{0} \}$\\
 tq (startIndex$_{1}$ = startIndex$_{0}$
@@ -80,9 +81,9 @@ on a bien :
 \end{itemize}
 
 
-L'invariant est donc vérifié sur Init.
+L'invariant est donc vérifié sur Init.\\
 
-\subsubsection*{$\{$Inv $\&\&$ !H$\}$ Iter $\{$Inv$\}$}
+\textbf{$\{$Inv $\&\&$ !H$\}$ Iter $\{$Inv$\}$}
 
 $\{$ switchDone = switchDone$_{1}$, $i = i_{1}$, tmp = tmp$_{1}$, startIndex = startIndex$_{1}$, decalage = decalage$_{1}$, nswitch = nswitch$_{1}$, tab = tab$_{1} \}$ tq (startIndex$_{1}$ = startIndex$_{0}$\\
 $\wedge$ $0 \leq$ startIndex < tab.length \\
@@ -137,7 +138,7 @@ On obtient bien notre invariant:
 
 Notre invariant est donc vérifié sur Iter. \\
 
-\subsubsection*{$\{$Inv $\&\&$ H$\}$ Clot $\{$Post$\}$}
+\textbf{$\{$Inv $\&\&$ H$\}$ Clot $\{$Post$\}$}
 
 $\{$switchDone = switchDone$_{1}$, $i = i_{1}$, tmp = tmp$_{1}$, startIndex = startIndex$_{1}$, decalage = decalage$_{1}$, nswitch = nswitch$_{1}$, tab = tab$_{1}\}$\\ 
 tq (INV $\wedge$ switchDone$_{1}$ == nSwitch$_{1})$ \\

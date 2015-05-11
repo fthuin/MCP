@@ -24,7 +24,8 @@ PGCD := PGCD(tab.length,decalage); & switchDone := switchDone+1;\\
 \textbf{H:}switchDone==PGCD & \textbf{Clot: } -\\
 \end{tabular}\\
 
-\subsubsection*{\{Pre\} Init \{Inv\}}
+\subsubsection*{Preuve partielle de l'algorithme}
+\textbf{\{Pre\} Init \{Inv\}}
 
 \{decalage = decalage$_{0}$, tab = tab$_{0}$ [val$_{0}^{0}$, val$_{0}^{1}$, ... ,val$_{0}^{\mathrm{tab.length}-1}$])\} tq (tab est un tableau d'entiers != null
 $\dot{\wedge}$ decalage est un nombre entier positif)\\
@@ -37,7 +38,7 @@ On a bien qu'il n'existe aucun $i \in \mathbb{Z} tel que i< \mathrm{switchDone} 
 
 L'invariant est donc vérifié sur INIT.
 
-\subsubsection*{\{Inv \&\& !H \} Iter \{Inv\}}
+\textbf{\{Inv \&\& !H \} Iter \{Inv\}}
 
 \{decalage = $decalage_{1}$, tab = tab$_{1}$ [val$_{1}^{0}$, val$_{1}^{1}$, ... ,val$_{1}^{\mathrm{tab.length-1}}$]), switchDone = switchDone$_{1}$, pgcd = pgcd$_{1}$ \} tq (INV $\wedge$ switchDone $\neq$ pgcd )\\
 
@@ -59,9 +60,9 @@ que chaque élément à la position $P_{i}$  est déplacé à la position P$_{i+
 On a donc que les éléments aux indices $tab_{0}[((j \times \mathrm{decalage}) + i) \% \mathrm{tab.length}]$ sont déplacés aux indices $(((j+1)\times \mathrm{decalage})+i) \% \mathrm{tab.length}$ pour chaque $i < \mathrm{switchDone}$ et $j < \frac{\mathrm{tab.length}}{\mathrm{PGCD}}$.
 A chaque itération, nous avons donc que $\mathrm{switchDone} \times \frac {\mathrm{tab.length}}{\mathrm{PGCD}}$ décalages ont été effectués\\
 
-Notre invariant est bien respecté pour Iter. 
+Notre invariant est bien respecté pour Iter.\\
 
-\subsubsection*{\{Inv \&\& H\} Clot \{Post\}}
+\textbf{\{Inv \&\& H\} Clot \{Post\}}\\
 \{decalage = $decalage_{1}$, tab = tab$_{1}$ [val$_{1}^{0}$, val$_{1}^{1}$, ... ,val$_{1}^{\mathrm{tab.length-1}}$]), switchDone = switchDone$_{1}$, pgcd = pgcd$_{1}$\} tq (INV $\wedge$ switchDone == pgcd )\\
 
  Nous avons que switchDone=PGCD ce qui implique qu'on a déplacé
