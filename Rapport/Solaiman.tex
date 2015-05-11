@@ -2,7 +2,7 @@
 \subsubsection*{Spécifications}
 
 \noindent \textbf{Pré :} tab est un tableau d'entiers\\
-\indent \indent $\wedge$ decalage est un nombre d'entiers positifs\\
+\indent $\dot{\wedge}$ decalage est un nombre entiers positifs\\
 \textbf{Post :} tous les éléments du tableau aux positions i sont déplacés aux positions (i+decalage \% tab.length)\\
 \textbf{Résultat :} - \\
 
@@ -10,7 +10,7 @@
 
 \textbf{Invariant :}
 
-\begin{tabular}{ll}
+\begin{tabular}{lp{14cm}}
 
 & $\mathrm{decalage}=\mathrm{decalage}_{0}$ \\
 $\dot{\wedge}$ & $\forall i \in \mathbb{Z} \mid i < \mathrm{switchDone} $ \\
@@ -24,7 +24,7 @@ $\{decalage=decalage_{0}, PGCD =\cdots, switchDone=0$
 $PGCD_{1} = \cdots$
 
 On a bien qu'il n'existe aucun $i < \mathrm{switchDone}$ et donc
-qu'aucun élément n'est déplacé au sein de tab.
+qu'aucun élément n'est déplacé au sein de tab.@
 
 L'invariant est donc vérifié sur INIT.
 
