@@ -1,6 +1,17 @@
 \subsection{Problème général}
 Les Pre, Post, Inv, H sont bien des expressions logiques 
 \subsection{Sous-problème 1}
+
+\subsubsection*{Specifications}
+\textbf{Pré : } tab est un tableau d'entiers\\
+ 	  \indent \indent $\wedge$ tab != null\\
+	  \indent \indent $\wedge$ startIndex est un indice tel que 0 <= startIndex < tab.length \\
+	  \indent \indent $\wedge$ décalage est un entier positif \\
+	  \indent \indent $\wedge$ nSwitch est un entier positif 0 <= nSwitch < tab.length\\
+\textbf{Post :}  le tableau est modifié de manière à ce que les éléments aux positions P$_{i}$ sont déplacés aux positions P$_{i+1}$ pour tout $i$ appartenant à $[0,nSwitch[$ tel que $P_{x} = (startIndex + (decalage\times x))\ mod\ tab.length$\\
+\textbf{Résultat :}  - \\
+
+
 \textbf{Invariant}
 
 	startIndex = startIndex$_{0}$\\
@@ -98,7 +109,7 @@ Inv $\Rightarrow 0 \leq switchDone \leq tab.length$ donc $tab.length - switchDon
 
 Vérifions maintenant que notre variant décroit sur Iter.\\
 
-Prenons Inv $\&\&$ !H 
+Prenons Inv $\&\&$ !H \\
 
 E = $\{ switchDone = switchDone_{1}, i = i_{1}, tmp = tmp_{1}, startIndex = startIndex_{1}, decalage = decalage_{1}, nswitch = nswitch_{1}, tab = tab_{1}\}$\\
 tq $(startIndex_{1} = startIndex_{0}$
