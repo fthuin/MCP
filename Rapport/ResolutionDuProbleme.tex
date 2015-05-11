@@ -15,31 +15,35 @@ Les Pre, Post, Inv, H sont bien des expressions logiques
 \textbf{Invariant}
 
 	startIndex = startIndex$_{0}$\\
+$\wedge$ $0 \leq$ startIndex < tab.length \\
 $\wedge$ decalage = decalage$_{0}$\\
 $\wedge$ nswitch = nswitch$_{0}$\\
-$\wedge$ tab = tab$_{0}$ [val$_{1}^{0}$, val$_{1}^{1}$, ... val$_{1}^{tab.length}$]\\
-$\wedge$ $0\leq switchDone < tab.length$\\
+$\wedge$ $0\leq switchDone \leq nSwitch < tab.length$\\
 $\wedge$ $0\leq i < tab.length$\\
-$\wedge$ $i = startindex + (switchDone+1\times decalage) \% tab.length$\\
+$\wedge$ $i = startindex + ((switchDone+1)\times decalage) \% tab.length$\\
 $\wedge$ $tmp = tab[(startIndex + (switchDone\times decalage))  \% tab.length]$\\
-$\wedge$ Les éléments x$_{j}$ tels que $Vj$, $j$ dans $Z$, $j<switchDone$ on a $x_{j}=tab_{0}[(startindex + (j\times decalage))\ \% tab.length]$ sont déplacés aux index $(startindex + ((j+1)* decalage))\%tab.length$\\
+$\wedge$ Les éléments x$_{j}$ tels que $\forall j$, $j$ dans $Z$, $j<switchDone$ on a $x_{j}=tab_{0}[(startindex + (j\times decalage))\ \% tab.length]$ sont déplacés aux index $(startindex + ((j+1)* decalage))\%tab.length$\\
 
 \subsubsection*{$\{$Pre$\}$ Init $\{$Inv$\}$}
 
-$\{\}$ tq (startIndex = startIndex$_{0}$) \\
+$\{startIndex = startIndex_{0}, decalage = decalage_{0}, nswitch = nswitch_{0} }$ tq (startIndex$_{1}$ = startIndex$_{0}$ \\
 $\wedge$ decalage$_{1}$ = decalage$_{0}$\\
 $\wedge$ nswitch$_{1}$ = nswitch$_{0}$\\
-$\wedge$ tab = tab$_{0}$ [val$_{1}^{0}$, val$_{1}^{1}$, ... val$_{1}^{tab.length}$]\\
+$\wedge$ tab = tab$_{0}$ [val$_{1}^{0}$, val$_{1}^{1}$, ... val$_{1}^{tab.length-1}$])\\
 
+INIT
 
-{$switchDone = 0,\ i = (startIndex_0 + decalage_0)\ \% tab.length, tmp = tab_0[startindex_0]$}\\
+$\{switchDone = 0,\ i = (startIndex_0 + decalage_0)\ \% tab.length, tmp = tab_0[startindex_0]\}$\\
 on a bien : 
 \begin{itemize}
 	\item $0\leq switchDone < tab.length$
 	\item $i = startindex + (switchDone+1\times decalage)\ \% tab.length $car$ switchDone = 0$
 	\item $tmp = tab[(startIndex + (SwitchDone\times decalage))\ \% tab.length]$ car $switchDone = 0$
+	\item il n'existe pas de $j \in \mathbb{Z}$, $j$< SwitchDone = 0 donc la dernière conjonction de notre invariant est vraie. 
 \end{itemize}
-l'invariant est donc vérifié sur Init
+
+
+L'invariant est donc vérifié sur Init.
 
 \subsubsection*{$\{$Inv $\&\&$ !H$\}$ Iter $\{$Inv$\}$}
 
