@@ -11,7 +11,7 @@ Les Pre, Post, Inv, H sont bien des expressions logiques
 \begin{tabular}{ll}
   & \textit{tab} est un tableau d'entiers \\
   $\dot{\wedge}$ & tab != null \\
-  $\dot{\wedge}$ & j est un indice tel que $0 \le j < \mathrm{tab.length}$
+  $\dot{\wedge}$ & $j$ est un indice tel que $0 \le j < \mathrm{tab.length}$
 \end{tabular}
 
 \paragraph{Post :}
@@ -38,7 +38,7 @@ L'exécution symbolique prouve que les instructions permettent d'arriver à la p
 	  \indent \indent $\wedge$ startIndex est un indice tel que 0 $\leq$ startIndex < tab.length \\
 	  \indent \indent $\wedge$ decalage est un entier positif \\
 	  \indent \indent $\wedge$ nSwitch est un entier positif 0 $\leq$ nSwitch $\leq$ tab.length\\
-\textbf{Post :}  le tableau est modifié de manière à ce que les éléments aux positions P$_{i}$ sont déplacés aux positions P$_{i+1}$ pour tout $i$ appartenant à $[0,nSwitch[$ tel que $P_{x} = (startIndex + (decalage\times x))\ mod\ tab.length$\\
+\textbf{Post :}  le tableau est modifié de manière à ce que les éléments aux positions P$_{i}$ sont déplacés aux positions P$_{i+1}$ pour tout $i$ appartenant à $[0,$nSwitch$[$ tel que $P_{x} = ($startIndex$ + ($decalage$\times x))\ mod\ $tab.length\\
 \textbf{Résultat :}  - \\
 \textbf{Environement: } int switchDone, int i, int tmp\\
 
@@ -47,27 +47,22 @@ L'exécution symbolique prouve que les instructions permettent d'arriver à la p
 $\wedge$ $0 \leq$ startIndex < tab.length \\
 $\wedge$ decalage = decalage$_{0}$\\
 $\wedge$ nswitch = nswitch$_{0}$\\
-$\wedge$ $0\leq switchDone \leq nSwitch \leq tab.length$\\
-$\wedge$ $0\leq i < tab.length$\\
-$\wedge$ $i = startIndex + ((switchDone+1)\times decalage) \% tab.length$\\
-$\wedge$ $tmp = tab[(startIndex + (switchDone\times decalage))  \% tab.length]$\\
-$\wedge$ Les éléments x$_{j}$ tels que $\forall j$, $j$ dans $Z$, $j<switchDone$ on a $x_{j}=tab_{0}[(startindex + (j\times decalage))\ \% tab.length]$ sont déplacés aux index $(startindex + ((j+1)* decalage))\%tab.length$\\
+$\wedge$ $0\leq$ switchDone$ \leq$ nSwitch $\leq$ tab.length\\
+$\wedge$ $0\leq i <$ tab.length\\
+$\wedge$ $i =$ startIndex $+ (($switchDone$+1)\times$ decalage)$ \% tab.length$\\
+$\wedge$ tmp = tab[(startIndex $+$ (switchDone$\times$ decalage))  $\% $tab.length$]$\\
+$\wedge$ Les éléments $x_{j}$ tels que $\forall\ j$, $j$ dans $\mathbb{Z}$, $j<$switchDone on a $x_{j}=$tab$_{0}[($startindex$ + (j\times$ decalage))$\ \%$ tab.length$]$ sont déplacés aux index $($startindex$ + ((j+1)\times  $decalage$))\% $tab.length\\
 
 \noindent \textbf{Condition d'arrêt:} switchDone == nSwitch\\
 
-\noindent \textbf{Init:}\\
-switchDone := 0;\\
-i := (startIndex + decalage) \% tab.length;\\
-tmp := tab[startIndex];\\
-
-\noindent \textbf{Iter: }\\
-tmp := switchUnique(tab, i, tmp);\\
-i := (i+decalage) \% tab.length;\\
-switchDone := switchDone + 1;\\
+\noindent \begin{tabular}{l|l}
+\textbf{Init:} & \textbf{Iter: }\\
+switchDone := 0; & tmp := switchUnique(tab, i, tmp);\\
+i := (startIndex + decalage) \% tab.length; & i := (i+decalage) \% tab.length;\\
+tmp := tab[startIndex]; & switchDone := switchDone + 1;\\
+\end{tabular}\\
 
 \noindent \textbf{Clot: } -\\
-
-
 
 \subsubsection*{$\{$Pre$\}$ Init $\{$Inv$\}$}
 
