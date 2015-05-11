@@ -32,8 +32,8 @@ pgcd := pgcd(tab.length,decalage); & switchDone=switchDone+1;\\
 
 \subsubsection*{\{Pre\} Init \{Inv\}}
 
-\{decalage = $decalage_{0}$ \}
-$\wedge$ tab = tab$_{0}$ [val$_{1}^{0}$, val$_{1}^{1}$, ... ,val$_{1}^{tab.length-1}$])\\
+\{decalage = $decalage_{0}$, tab = tab$_{0}$ [val$_{0}^{0}$, val$_{0}^{1}$, ... ,val$_{0}^{tab.length-1}$])\} tel que \\tab est un tableau d'entiers != null
+$\dot{\wedge}$ decalage est un nombre entiers positifs\\
 
 INIT
 
@@ -45,8 +45,21 @@ L'invariant est donc vérifié sur INIT.
 
 \subsubsection*{\{Inv \&\& !H \} Iter \{Inv\}}
 
+Nous avons que lors de l'Iter, l'environnement symbolique suivant \{decalage = $decalage_{1}$, tab = tab$_{1}$ [val$_{1}^{0}$, val$_{1}^{1}$, ... ,val$_{1}^{tab.length-1}$])\}
+
 A chaque itération, switchCadran2 est appelé avec les arguments : tab,
-switchDone (incrémenté), décalage et tab.length / PGCD. De ce fait,
+switchDone (incrémenté), décalage et tab.length / PGCD.
+
+Nous respectons bien les préconditions de switchCadran2 car:
+\begin{enumerate}
+ \item tab donné à switchCadran2 est le tableau non nul composé d'entiers reçu en paramètre dont les éléments ont éventuellement été deplacés
+ \item switchDone est positif
+ \item decalage respecte les precondition de switchCadran et est donc positif
+ \item tab.length / PGCD qui est bien compris entre 0 et tab.length
+\end{enumerate}
+
+
+De ce fait,
 selon la spécification de switchCadran2 prouvé précédemment, nous avons
 que chaque élément $x \in [0\cdots
     \frac{\mathrm{tab.length}}{\mathrm{PGCD}}[$ est déplacé à la
@@ -55,12 +68,39 @@ que chaque élément $x \in [0\cdots
 On a donc que les éléments aux indices $tab_{0}[(j \times decalage + i) \% tab.length]$ sont déplacés aux indices $(((j+1)\times decalage)+i) \% tab.length$ pour chaque $i < \mathrm{switchDone}$ et $j \leq \frac{\mathrm{tab.length}}{\mathrm{PGCD}}$ 
 A chaque itération, nous avons donc que $switchDone \times \frac {\mathrm{tab.length}}{\mathrm{PGCD}}$ décalages ont été effectué
 \subsubsection*{\{Inv \&\& H\} Clot \{Post\}}
-
+Nous avons que lors de l'Iter, l'environnement symbolique suivant \{decalage = $decalage_{1}$, tab = tab$_{1}$ [val$_{1}^{0}$, val$_{1}^{1}$, ... ,val$_{1}^{tab.length-1}$])\}
  Nous avons que switchDone=PGCD ce qui implique qu'on a déplacé
 $\mathrm{PGCD}\times \frac{\mathrm{tab.length}}{\mathrm{PGCD}}$ éléments et
-que chacun d'entre eux est déplacé une et une seule fois (comme démontré
-plus haut). Tous les élémetnts de tab sont donc déplacés de décal positions.
+que chacun d'entre eux est déplacé une et une seule fois (comme démontré lors de la théorie du problème). Tous les élémetnts de tab sont donc déplacés de décal positions.
 
 \subsubsection*{Preuve de terminaison}
-TODO: Preuve de terminaison
-%TODO Preuve de terminaison
+
+Variant  : $pgcd - switchDone$
+
+INIT et INV:  $\Rightarrow 0 \leq switchDone \leq pgcd$ sachant que PGCD ne renvoie que des valeurs positives donc $pgcd - switchDone \geq 0$. Notre variant est bien positif ou nul.\\ 
+
+Vérifions maintenant que notre variant décroit sur Iter. Prenons Inv $\&\&$ !H \\
+
+E = $\{ switchDone = switchDone_{1}, pgcd = pgcd_{1}, tab = tab_{1}\}$\\
+tq $(INV \wedge switchDone_{1} != pgcd_{1})$.\\
+
+Une seule instruction va nous intéresse ici : \\
+
+\begin{center}
+  $switchDone++;$\\
+ \end{center} 
+ 
+Cela nous donne un nouvel environnement :\\
+
+E' = $\{switchDone = switchDone_{1}+1, ...\}$ tq (Idem).\\
+
+$Var(E) = pgcd - switchDone_{1}$
+$Var(E') = pgcd - switchDone = pgcd - (switchDone_{1}+1)$
+
+On a donc : $Var(E) = pgcd - switchDone_{1} > pgcd - (switchDone_1 +1) = pgcd - switchDone = Var(E')$.\\
+
+On a donc bien un variant qui décroit sur Iter.\\
+
+Ceci nous montre que le problème général se finira toujours. 
+
+Nous avons donc fini la correction partielle et prouvé que cet algorithme s'arrête toujours. On peut donc en conclure que cet algorithme est correct, suivant ses spécifications. \\
