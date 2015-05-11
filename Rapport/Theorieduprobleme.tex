@@ -2,24 +2,7 @@ Dans le problème du cadran, il faut montrer que toutes les positions du tableau
 
 Comme expliqué dans la section ci-dessus, nous voulons décomposer le cadran en différentes parties ayant la même taille. Dans cette partie nous allons montrer que nous pouvons déplacer les éléments de A positions, comme expliqué ci-dessus, sans repasser sur une case déjà visitée. \\
 
-\subsection{A et B premiers entre eux}
-Soient $A$ et $B$, deux nombres entiers positifs non nuls, premiers entre eux, avec $A < B$.\\
-Les éléments x$_{i}$ de la suite x$_{i} = A \times i\ mod\ B$ sont uniques pour tous $i$ appartenant à $[0, B-1]$.
-La suite des x$_{i}$ contiendra tous les éléments entre $[0, b-1]$ car ils sont uniques et il y en a $B$ (propriété du modulo : $0\leq x_i < B)$.
-
-\subsubsection* {Preuve}
-Prouvons que si $X$ et $Y$ sont deux entiers dans $[0, B-1]$ et que $A\times X\ mod\ B = A\times Y\ mod\ B$ alors $X = Y$. Autrement dit, deux éléments de la suite des x$_{i}$ ne sont égaux que s'il s'agit du même $i$, et donc du même élément. Nous notons la congruence modulo $N$ de deux nombres entiers positifs $A$ et $B$: $A \equiv B\ (mod\ N)$. Donc nous notons: $A\times X ≡ A\times Y\ (mod\ B)$.\\
-
-Grâce aux propriétés du modulo, nous savons que $A\times X ≡ A\times Y\ (mod\ B) \Rightarrow A\times (X-Y) ≡ 0\ (mod\ B).$ Comme $A$ et $B$ sont premiers entre eux, on sait que leur PGCD vaut 1, puisqu'ils n'ont pas de diviseur commun autre que 1. Et par définition du PPCM : $PPCM(A,B) = \frac{A\times B}{PGCD(A,B)} = \frac{A\times B} {1} = A\times B$. Ce qui signifie que $B$ ne peut pas être un multiple de $A$.\\
-
-Ceci implique que: $\neg  \exists k \in \mathbb{Z} \wedge k>0\ :\ A\times k = B$. Si c'était le cas, $A\times k$ serait le PPCM de $A$ et $B$ ce qui n'est pas correct. Donc nous savons que : $A\times (X-Y) ≡ 0\ (mod\ B) \Rightarrow (X-Y) = 0$. C'est la seule possibilité pour que la relation de congruence soit respectée.\\
-
-En effet, comme $X$ et $Y$ $\in$ $[0, B-1]$, $(X-Y)$ $\in$ $[-(B-1),B-1]$. Et comme $B$ n'est pas un multiple de $A$, $A$ "n'apporte rien" à la congruence avec 0. B doit donc être multiple de $(X-Y)$. Mais au vu des valeurs que peut prendre $(X-Y)$, la seule possibilité est que $(X-Y) = 0$.\\
-On a donc que $X = Y$. Nous avons donc prouvé ce que nous voulions. \\
-
-Intuitivement : si $A$ et $B$ sont premiers entre eux, cela signifie que faire $A\times i\ mod\ B$ avec $i$ dans $[0, B-1]$, nous donnera toujours un nombre différent. Donc pour notre problème, en partant à l'indice 0, on peut ajouter le décalage et avoir l'indice d'une case qui n'a pas encore été visitée. On peut ajouter une nouvelle fois le décalage et tomber sur une autre case non visitée. On peut faire cela $B$ fois. Grâce à ce nous avons montré, on sait que l'on ne tombera pas deux fois sur la même case et qu'on les parcourra toutes. 
-
-\subsection*{A et B non premiers entre eux}
+\subsubsection*{Théorème}
 Soient $A$ et $B$ deux nombres entiers positifs avec $A < B$. Les éléments de la suite x$_{i,c} = (c + (A\times i))\ mod\ B$ sont uniques pour tous c appartenant à $[0, PGCD(A,B)-1]$ et $i$ appartenant à $[0, (\frac{B}{PGCD(A,B)})-1]$, et cette suite contiendra tous les éléments de $[0, B-1]$. \\
 
 \subsubsection*{Preuve}
@@ -29,7 +12,7 @@ On sait que $PPCM(A,B) = \frac{A\times B}{PGCD(A,B)}$. Prenons $J = \frac{B}{PGC
 Si l'on prend x$_{i} = A\times i\ mod\ B$ pour tout $i$ appartenant à $[0, J-1]$, on sait que les éléments x$_{i}$ seront uniques. En prenant $X$ et $Y$ appartenant à $[0, J-1]$, on sait que $A\times (X-Y) ≡ 0\ (mod\ B)$ ne sera vrai que pour $X=Y$. En effet, étant donné que $(X-Y)$ appartient à $[-J+1, J-1]$, donc à $[- \frac{B}{PGCD(A,B)} +1,\frac{B}{PGCD(A,B)} -1] $, on a $A\times (X-Y)$ appartient à $[- PPCM(A,B) +1, PPCM(A,B) )-1]$. On voit donc que $A\times (X-Y)$ n'atteint jamais le plus petit commun multiple de A et B.\\
 La seule possibilité pour que la congruence soit respectée est donc que $(X-Y) = 0$, donc $X=Y$. Ainsi $A\times i\ mod\ B = x_{i}$, les x$_{i}$ seront uniques pour $i$ appartenant a $[0, J-1]$.\\
 
-Maintenant, il ne manque plus qu'a ajouter le $c$ dans cette expression pour arriver à l'expression énoncée plus haut. Les propriétés du modulo nous donnent : si $e ≡ f\ (mod\ N)$ alors $e+g ≡ f+g\ (mod\ N)$. On peut donc écrire : $(c +(A\times i))\ mod\ B = x_{i,c}$ pour $i$ dans $[0, J-1]$ et c dans $[0, PGCD(A,B) -1]$. Par le même raisonnement que celui que nous avons présenté, nous pouvons dire que les éléments $x_{i,c}$ seront uniques et il y en aura B.\\
+Maintenant, il ne manque plus qu'a ajouter le $c$ dans cette expression pour arriver à l'expression énoncée plus haut. Les propriétés du modulo nous donne : si $e ≡ f\ (mod\ N)$ alors $e+g ≡ f+g\ (mod\ N)$. On peut donc écrire : $(c +(A\times i))\ mod\ B = x_{i,c}$ pour $i$ dans $[0, J-1]$ et c dans $[0, PGCD(A,B) -1]$. Par le même raisonnement que celui que nous avons présenté, nous pouvons dire que les éléments $x_{i,c}$ seront uniques et il y en aura B.\\
 En effet, nous savons que $i$ peut prendre $\frac{B}{PGCD(A,B)}$ valeurs différentes et $c$ peut prendre $PGCD(A,B)$ valeurs différentes. Donc $x_{i,c}$ peut prendre $B$ valeurs différents.\\
 
 Intuitivement : On découpe le cadran en $\frac{B}{PGCD(A,B)}$ parties de $PGCD(A,B)$ éléments. 
